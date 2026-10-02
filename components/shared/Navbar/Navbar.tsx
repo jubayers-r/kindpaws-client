@@ -1,0 +1,112 @@
+"use client";
+
+import { MoveUpRight } from "lucide-react";
+import { Logo, LogoBlack } from "@/assets/Logo";
+import { Button } from "@/components/ui/button";
+import MobileMenu from "./MobileMenu";
+import NavLinks from "./NavLinks";
+import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { AvatarDropdown } from "./AvatarDropdown";
+import { useEffect, useState, Suspense } from "react";
+
+export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      className={`navbar px-5 transition-[backdrop-filter,background-color,border-radius] duration-300 mt-2 2xl:w-9/11 w-[95%] mx-auto sm:my-7 fixed left-0 right-0 z-50 py-2 sm:py-5 grid grid-cols-[1fr_auto_1fr] items-center ${
+        scrolled ? "rounded-full backdrop-blur-md bg-white/70" : ""
+      }`}
+    >
+      {/* logo / logoBlack on scroll */}
+      <div className="relative justify-self-start col-start-1 row-start-1">
+        <div
+          className={`transition-opacity duration-300 ${
+            scrolled ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <Logo />
+        </div>
+        <div
+          className={`absolute inset-0 transition-opacity duration-300 ${
+            scrolled ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <LogoBlack />
+        </div>
+      </div>
+
+      {/* navcenter */}
+      <div
+        className={`hidden lg:flex items-center justify-self-center col-start-2 row-start-1 rounded-full px-8 py-2 transition-[background-color,box-shadow] duration-300 ${
+          scrolled ? "shadow-none" : "bg-white shadow-sm"
+        }`}
+      >
+        <Suspense fallback={<div className="h-6 w-48" />}>
+          <NavLinks />
+        </Suspense>
+      </div>
+
+      {/* navend */}
+      <div className="flex items-center gap-4 justify-self-end col-start-3 row-start-1">
+        {!user && (
+          <Link href="/register">
+            <p
+              className={`border-b hover:brightness-90 sm:block hidden transition-colors duration-300 ${
+                scrolled ? "text-black" : "text-white"
+              }`}
+            >
+              Register
+            </p>
+          </Link>
+        )}
+        {!user ? (
+          <Link href="/login">
+            <Button className="py-4 rounded-full hover:bg-white hover:text-black">
+              Login
+            </Button>
+          </Link>
+        ) : (
+          <AvatarDropdown />
+        )}
+
+        <div
+          className={`w-[1px] h-6 rounded-full opacity-60 transition-colors duration-300 ${
+            user ? "xl:hidden" : ""
+          } ${scrolled ? "bg-black/30" : "bg-gray-300"}`}
+        />
+        {!user && (
+          <Link href="/contact-us">
+            <Button
+              variant="outline"
+              className="hidden xl:inline-flex px-6 py-4 min-w-[170px] items-center justify-center gap-2 rounded-full border border-black/10 bg-white hover:bg-amber-500 text-black hover:text-white"
+            >
+              Get In Touch <MoveUpRight />
+            </Button>
+          </Link>
+        )}
+
+        <div
+          className={`xl:hidden transition-colors duration-300 ${
+            scrolled ? "text-black" : "text-white"
+          }`}
+        >
+          <MobileMenu />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
