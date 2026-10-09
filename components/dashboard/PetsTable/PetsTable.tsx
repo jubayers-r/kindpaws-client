@@ -39,6 +39,7 @@ import {
   TABLE_HEAD,
 } from "@/components/dashboard/shared/styles";
 import { Pet } from "@/types";
+import { API_BASE } from "@/lib/api";
 
 const ROWS_PER_PAGE = 10;
 
@@ -79,7 +80,7 @@ export default function PetsTable({
   } = useQuery<Pet[]>({
     queryKey: ["allPets"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/pets");
+      const res = await fetch(`${API_BASE}/api/pets`);
       if (!res.ok) throw new Error("Failed to fetch pets");
       return res.json();
     },
@@ -88,7 +89,7 @@ export default function PetsTable({
   const deletePet = useMutation({
     mutationFn: async (petId: string) => {
       const res = await axios.delete(
-        "https://kind-paws.vercel.app/api/pets/delete",
+        `${API_BASE}/api/pets/delete`,
         {
           params: { id: petId },
         }
@@ -106,7 +107,7 @@ export default function PetsTable({
   const toggleStatus = useMutation({
     mutationFn: async (petId: string) => {
       const res = await axios.patch(
-        "https://kind-paws.vercel.app/api/pets/statusToggle",
+        `${API_BASE}/api/pets/statusToggle`,
         {},
         { params: { id: petId } }
       );

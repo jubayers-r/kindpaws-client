@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect } from "react";
 import { LogOut } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -45,8 +45,19 @@ function DashboardTitle() {
 export const DashboardTopNavbar: React.FC<DashboardTopNavbarProps> = ({
   menuTrigger,
 }) => {
+  const router = useRouter();
   const { user, logOut } = useAuth();
   const { data: role } = useUserRole();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      router.replace("/login");
+    } catch (err) {
+      console.error("Logout error:", err);
+      router.replace("/login");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b bg-background/80 px-4 backdrop-blur-md sm:px-8">
@@ -92,7 +103,7 @@ export const DashboardTopNavbar: React.FC<DashboardTopNavbarProps> = ({
         <Button
           variant="ghost"
           size="icon"
-          onClick={logOut}
+          onClick={handleLogout}
           aria-label="Log out"
           className="text-destructive hover:bg-destructive/10 hover:text-destructive"
         >

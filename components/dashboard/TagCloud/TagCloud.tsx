@@ -22,7 +22,7 @@ export default function TagCloud() {
   const { data, isLoading, error, refetch } = useQuery<Record<string, number>>({
     queryKey: ["categoryData"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/stats/categories");
+      const res = await fetch("/api/stats/categories");
       if (!res.ok) throw new Error("Failed to fetch category data");
       return res.json();
     },

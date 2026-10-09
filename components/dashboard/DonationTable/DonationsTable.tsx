@@ -69,7 +69,7 @@ export default function DonationsTable({
   } = useQuery<Campaign[]>({
     queryKey: ["allDonations"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/campaigns");
+      const res = await fetch("/api/campaigns");
       if (!res.ok) throw new Error("Failed to fetch donation campaigns");
       return res.json();
     },
@@ -77,7 +77,7 @@ export default function DonationsTable({
 
   const deleteCampaign = useMutation({
     mutationFn: async (campaignId: string) =>
-      await axios.delete("https://kind-paws.vercel.app/api/campaigns/delete", {
+      await axios.delete("/api/campaigns/delete", {
         params: { id: campaignId },
       }),
     onSuccess: () => {
@@ -91,7 +91,7 @@ export default function DonationsTable({
   const togglePause = useMutation({
     mutationFn: async (campaignId: string) =>
       await axios.patch(
-        "https://kind-paws.vercel.app/api/campaigns/statusToggle",
+        "/api/campaigns/statusToggle",
         {},
         { params: { id: campaignId } }
       ),

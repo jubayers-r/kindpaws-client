@@ -25,7 +25,7 @@ export const OverviewMetrics = () => {
   }>({
     queryKey: ["admin-metrics"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/stats/overview");
+      const res = await fetch("/api/stats/overview");
       if (!res.ok) throw new Error("Failed to fetch dashboard metrics");
       return res.json();
     },

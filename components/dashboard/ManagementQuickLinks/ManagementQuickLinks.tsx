@@ -57,7 +57,7 @@ export default function ManagementQuickLinks() {
   const { data, isLoading, error, refetch } = useQuery<Record<string, number>>({
     queryKey: ["dashboardStats"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/stats/quick-links");
+      const res = await fetch("/api/stats/quick-links");
       if (!res.ok) throw new Error("Failed to fetch dashboard stats");
       return res.json();
     },

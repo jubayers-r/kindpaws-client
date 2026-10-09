@@ -37,7 +37,7 @@ export const RecentActivity = () => {
   });
 
   return (
-    <motion.div {...rise()} className="w-full">
+    <motion.div {...rise()} className="w-full h-full">
       <Card className={`${CARD} h-full`}>
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-secondary">
@@ -45,7 +45,7 @@ export const RecentActivity = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="divide-y">
+          <ul className="divide-y divide-border/60">
             {(isLoading ? Array(5).fill(null) : data).map((item, idx) => (
               <li key={item?.id || idx} className="flex items-center gap-3 py-3">
                 {isLoading ? (

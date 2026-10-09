@@ -28,7 +28,7 @@ export const UserRecentActivity: React.FC<UserRecentActivityProps> = ({
   const recentActivity = data?.recentActivity ?? [];
 
   return (
-    <motion.div {...rise()} className="w-full">
+    <motion.div {...rise()} className="w-full h-full">
       <Card className={`${CARD} h-full`}>
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-secondary">
@@ -50,7 +50,7 @@ export const UserRecentActivity: React.FC<UserRecentActivityProps> = ({
               No recent activity yet.
             </p>
           ) : (
-            <ul className="divide-y">
+            <ul className="divide-y divide-border/60">
               {recentActivity.map(({ id, type, description, time }) => (
                 <li key={id} className="py-3">
                   <div className="flex items-center justify-between gap-3">
