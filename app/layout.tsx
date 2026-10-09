@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Laila, Paytone_One, Cherry_Bomb_One, Outfit } from "next/font/google";
+import { Laila, Paytone_One, Cherry_Bomb_One, Outfit, Roboto } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/components/providers/QueryProvider";
 import AuthProvider from "@/context/auth/AuthProvider";
@@ -32,6 +32,13 @@ const outfit = Outfit({
   display: "swap",
 });
 
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "KindPaws - Adopt, Rescue & Support Pets in Need",
   description:
@@ -49,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${laila.variable} ${paytoneOne.variable} ${cherryBomb.variable} ${outfit.variable} h-full antialiased`}
+      className={`${laila.variable} ${paytoneOne.variable} ${cherryBomb.variable} ${outfit.variable} ${roboto.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-laila)] bg-background text-foreground">
         <QueryProvider>

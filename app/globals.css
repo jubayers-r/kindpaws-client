@@ -20,6 +20,8 @@ body {
   --font-body: var(--font-laila), "Laila", ui-serif, serif;
   --font-display: var(--font-paytone), "Paytone One", ui-sans-serif, sans-serif;
   --font-brand: var(--font-cherry), "Cherry Bomb One", ui-rounded, cursive;
+  --font-outfit: var(--font-outfit), "Outfit", ui-sans-serif, sans-serif;
+  --font-roboto: var(--font-roboto), "Roboto", ui-sans-serif, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
