@@ -10,32 +10,28 @@ interface LoadingScreenProps {
 }
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
-  const [visible, setVisible] = useState(isLoading);
+  const [visible, setVisible] = useState(false);
   const shownAtRef = useRef<number | null>(null);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     if (isLoading) {
-      if (shownAtRef.current === null) {
-        shownAtRef.current = Date.now();
-      }
-      timer = setTimeout(() => {
-        setVisible(true);
-      }, 0);
+      if (shownAtRef.current === null) shownAtRef.current = Date.now();
+      timer = setTimeout(() => setVisible(true), 0);
     } else {
       const shownAt = shownAtRef.current;
       if (shownAt !== null) {
-        const elapsed = Date.now() - shownAt;
-        const remaining = Math.max(0, MIN_SHOW_MS - elapsed);
-        timer = setTimeout(() => {
+        const remaining = MIN_SHOW_MS - (Date.now() - shownAt);
+        if (remaining <= 0) {
           shownAtRef.current = null;
           setVisible(false);
-        }, remaining);
-      } else {
-        timer = setTimeout(() => {
-          setVisible(false);
-        }, 0);
+        } else {
+          timer = setTimeout(() => {
+            shownAtRef.current = null;
+            setVisible(false);
+          }, remaining);
+        }
       }
     }
 

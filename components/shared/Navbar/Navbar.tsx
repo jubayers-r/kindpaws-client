@@ -9,19 +9,28 @@ import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { AvatarDropdown } from "./AvatarDropdown";
 import { useEffect, useState, Suspense } from "react";
+import { usePathname } from "next/navigation";
 
-export const Navbar = () => {
+function NavbarContent() {
   const [scrolled, setScrolled] = useState(false);
   const { user } = useAuth();
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Reset to top when navigating
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const frame = requestAnimationFrame(handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname]);
 
   return (
     <div
@@ -106,6 +115,14 @@ export const Navbar = () => {
         </div>
       </div>
     </div>
+  );
+}
+
+export const Navbar = () => {
+  return (
+    <Suspense fallback={<div className="h-16 w-full" />}>
+      <NavbarContent />
+    </Suspense>
   );
 };
 

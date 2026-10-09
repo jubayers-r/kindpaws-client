@@ -18,7 +18,7 @@ export function PasswordInput<T extends FieldValues = FieldValues>({
 
   return (
     <div>
-      <label className="text-sm font-medium">Password</label>
+      <label className="text-sm font-medium mb-1 block">Password</label>
       <div className="relative">
         <Lock className="absolute left-3 top-2 text-muted-foreground h-5 w-5" />
         <Input
