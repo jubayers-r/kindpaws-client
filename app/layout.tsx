@@ -44,7 +44,9 @@ export const metadata: Metadata = {
   description:
     "KindPaws connects loving humans with pets waiting for a home and empowers communities to fund urgent animal rescue campaigns.",
   icons: {
-    icon: "/assets/Logo.png",
+    icon: "/paws-logo.png",
+    shortcut: "/paws-logo.png",
+    apple: "/paws-logo.png",
   },
 };
 
