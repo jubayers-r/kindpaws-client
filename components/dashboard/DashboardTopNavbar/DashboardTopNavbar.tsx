@@ -90,7 +90,7 @@ export const DashboardTopNavbar: React.FC<DashboardTopNavbarProps> = ({
 
         <div className="flex items-center gap-2 rounded-full border bg-card py-1 pl-1 pr-3">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user?.photoURL || ""} className="object-cover" />
+            <AvatarImage src={user?.photoURL || undefined} className="object-cover" />
             <AvatarFallback className="bg-primary text-sm font-semibold text-primary-foreground">
               {user?.displayName?.[0] || "U"}
             </AvatarFallback>

@@ -164,7 +164,7 @@ export default function ProfilePage() {
               />
               <div className="relative flex items-center gap-4">
                 <Avatar className="h-20 w-20 border-2 border-white/30">
-                  <AvatarImage src={user.photoURL || ""} className="object-cover" />
+                  <AvatarImage src={user.photoURL || undefined} className="object-cover" />
                   <AvatarFallback className="bg-primary text-xl font-semibold text-primary-foreground">
                     {user.displayName?.[0] || "U"}
                   </AvatarFallback>
@@ -226,7 +226,7 @@ export default function ProfilePage() {
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
-                <AvatarImage src={photoPreview || ""} className="object-cover" />
+                <AvatarImage src={photoPreview || undefined} className="object-cover" />
                 <AvatarFallback className="bg-primary text-lg font-semibold text-primary-foreground">
                   {name.trim()[0] || "U"}
                 </AvatarFallback>
