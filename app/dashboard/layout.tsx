@@ -117,16 +117,9 @@ function DashboardLayoutContent({
     </SheetTrigger>
   );
 
-  if (authLoading) {
-    return <LoadingScreen isLoading={true} />;
-  }
-
-  if (!user) {
-    return null;
-  }
-
   return (
     <div className="min-h-screen bg-background font-[family-name:var(--font-laila)]">
+      <LoadingScreen isLoading={authLoading} />
       <Sheet>
         <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r bg-card sm:flex">
           <div className="flex h-16 shrink-0 items-center border-b px-5">
