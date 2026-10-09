@@ -45,7 +45,7 @@ function LoginForm() {
   const updateLastLogin = async (userId: string) => {
     try {
       await axios.patch(
-        `https://kind-paws.vercel.app/api/users/last-login/${userId}`
+        `/api/users/last-login/${userId}`
       );
     } catch (err) {
       console.error("❌ Failed to update last login:", err);
@@ -62,7 +62,7 @@ function LoginForm() {
       }
 
       if (currentUser) {
-        const res = await axios.get("https://kind-paws.vercel.app/api/users", {
+        const res = await axios.get("/api/users", {
           params: { uid: currentUser.uid },
         });
 
@@ -114,26 +114,28 @@ function LoginForm() {
 
             <div>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <label className="text-sm font-medium">Email</label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-2.5 text-muted-foreground h-5 w-5" />
-                  <Input
-                    type="email"
-                    placeholder="you@example.com"
-                    className="pl-10"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Enter a valid email",
-                      },
-                    })}
-                  />
-                  {errors.email && (
-                    <p className="text-sm text-red-500 mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
+                <div>
+                  <label className="text-sm font-medium mb-1 block">Email</label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-2 text-muted-foreground h-5 w-5" />
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      className="pl-10"
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: "Enter a valid email",
+                        },
+                      })}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.email.message}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <PasswordInput register={register} errors={errors} />

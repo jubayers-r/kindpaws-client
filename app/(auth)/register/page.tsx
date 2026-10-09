@@ -96,7 +96,7 @@ function RegisterForm() {
       };
 
       await axios.post(
-        "https://kind-paws.vercel.app/api/users/register",
+        "/api/users/register",
         userDB
       );
     } catch (err: unknown) {
@@ -128,9 +128,9 @@ function RegisterForm() {
             <div className="space-y-4">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Full Name</label>
+                  <label className="text-sm font-medium mb-1 block">Full Name</label>
                   <div className="relative">
-                    <UserIcon className="absolute left-3 top-2.5 text-muted-foreground h-5 w-5" />
+                    <UserIcon className="absolute left-3 top-2 text-muted-foreground h-5 w-5" />
                     <Input
                       type="text"
                       placeholder="Your full name"
@@ -147,7 +147,7 @@ function RegisterForm() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium">Profile Picture</label>
+                  <label className="text-sm font-medium mb-1 block">Profile Picture</label>
                   <Input
                     type="file"
                     accept="image/*"
@@ -171,9 +171,9 @@ function RegisterForm() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium">Email</label>
+                  <label className="text-sm font-medium mb-1 block">Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-2.5 text-muted-foreground h-5 w-5" />
+                    <Mail className="absolute left-3 top-2 text-muted-foreground h-5 w-5" />
                     <Input
                       type="email"
                       placeholder="you@example.com"
