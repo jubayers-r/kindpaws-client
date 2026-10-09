@@ -7,10 +7,6 @@ import Link from "next/link";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import slider1 from "@/assets/hero/slider-3-slide-01.jpg";
-import slider2 from "@/assets/hero/slider-3-slide-02.jpg";
-import slider3 from "@/assets/hero/slider-3-slide-03.jpg";
-
 export const SwiperComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -19,19 +15,19 @@ export const SwiperComponent = () => {
       title: "Give Them a Second Chance",
       subtitle:
         "Every rescue pet has a story — your support helps rewrite it with love, care, and a forever home.",
-      image: slider1.src || "/assets/hero/slider-3-slide-01.jpg",
+      image: "/assets/hero/slider-3-slide-01.jpg",
     },
     {
       title: "Compassion in Every Donation",
       subtitle:
         "Even a small contribution can bring food, shelter, and medical aid to a pet in desperate need.",
-      image: slider2.src || "/assets/hero/slider-3-slide-02.jpg",
+      image: "/assets/hero/slider-3-slide-02.jpg",
     },
     {
       title: "Adopt, Don't Shop",
       subtitle:
         "Your decision to adopt saves lives and opens your home to unconditional love and loyalty.",
-      image: slider3.src || "/assets/hero/slider-3-slide-03.jpg",
+      image: "/assets/hero/slider-3-slide-03.jpg",
     },
   ];
 

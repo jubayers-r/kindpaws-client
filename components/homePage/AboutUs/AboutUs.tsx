@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { PawPrint, HeartHandshake, ShieldCheck, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import dog from "@/assets/about-img-dog.png";
 
 const features = [
   {
@@ -71,7 +70,7 @@ export const AboutUs = () => {
 
           <div>
             <Image
-              src={dog}
+              src="/assets/about-img-dog.png"
               alt="Golden Retriever"
               width={320}
               height={320}

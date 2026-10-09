@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Logo } from "@/assets/Logo";
+import { Logo } from "@/components/shared/Logo";
 import { Input } from "@/components/ui/input";
 import { CircleCheck, Send } from "lucide-react";
 

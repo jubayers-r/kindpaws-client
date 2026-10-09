@@ -1,7 +1,7 @@
 "use client";
 
 import { MoveUpRight } from "lucide-react";
-import { Logo, LogoBlack } from "@/assets/Logo";
+import { Logo, LogoBlack } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import MobileMenu from "./MobileMenu";
 import NavLinks from "./NavLinks";

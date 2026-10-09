@@ -13,7 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LogoBlack } from "@/assets/Logo";
+import { LogoBlack } from "@/components/shared/Logo";
 import { dashboardNavItems } from "@/data/DashboardNavItems";
 import DashboardTopNavbar from "@/components/dashboard/DashboardTopNavbar/DashboardTopNavbar";
 import { AuthRoleProvider } from "@/context/role/AuthRoleProvider";
