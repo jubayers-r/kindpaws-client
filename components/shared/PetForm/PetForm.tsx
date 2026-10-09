@@ -10,6 +10,7 @@ import StarterKit from "@tiptap/starter-kit";
 import axios from "axios";
 import { useAuth } from "@/hooks/useAuth";
 import { usePathname, useRouter, useParams } from "next/navigation";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -151,9 +152,12 @@ export const PetForm: React.FC<PetFormProps> = ({
             >
               {imageURL ? (
                 <div className="flex items-center gap-4">
-                  <img
+                  <Image
                     src={imageURL}
                     alt="Pet preview"
+                    width={96}
+                    height={96}
+                    unoptimized
                     className="h-24 w-24 rounded-2xl border-2 border-dashed border-gray-300 bg-white p-1 object-cover"
                   />
                   <div className="flex flex-col items-start gap-2">

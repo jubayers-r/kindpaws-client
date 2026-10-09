@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 import { toast } from "sonner";
 import {
   Pencil,
@@ -258,10 +259,12 @@ export default function PetsTable({
                       {(currentPage - 1) * ROWS_PER_PAGE + index + 1}
                     </TableCell>
                     <TableCell className="px-3 py-3">
-                      <img
+                      <Image
                         src={pet.image || "/paws-logo.png"}
                         alt={pet.name}
-                        loading="lazy"
+                        width={48}
+                        height={48}
+                        unoptimized
                         className="mx-auto h-12 w-12 rounded-xl object-cover"
                       />
                     </TableCell>
@@ -353,10 +356,12 @@ export default function PetsTable({
                 className="rounded-2xl border bg-card p-4 shadow-sm"
               >
                 <div className="flex items-center gap-4">
-                  <img
+                  <Image
                     src={pet.image || "/paws-logo.png"}
                     alt={pet.name}
-                    loading="lazy"
+                    width={64}
+                    height={64}
+                    unoptimized
                     className="h-16 w-16 rounded-xl object-cover"
                   />
                   <div className="min-w-0 space-y-1">

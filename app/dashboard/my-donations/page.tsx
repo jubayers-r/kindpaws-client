@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "sonner";
 import axios from "axios";
 
@@ -125,10 +126,12 @@ export default function MyDonationsPage() {
                 paginatedDonations.map((donation) => (
                   <TableRow key={donation._id}>
                     <TableCell className="px-3 py-3">
-                      <img
+                      <Image
                         src={donation.campaignSnapshot.image}
                         alt="Pet"
-                        loading="lazy"
+                        width={56}
+                        height={56}
+                        unoptimized
                         className="mx-auto h-14 w-14 rounded-xl object-cover"
                       />
                     </TableCell>
@@ -206,10 +209,12 @@ export default function MyDonationsPage() {
                 className="rounded-2xl border bg-card p-4 shadow-sm"
               >
                 <div className="flex gap-4">
-                  <img
+                  <Image
                     src={donation.campaignSnapshot.image}
                     alt="Pet"
-                    loading="lazy"
+                    width={80}
+                    height={80}
+                    unoptimized
                     className="h-20 w-20 rounded-xl object-cover"
                   />
                   <div className="min-w-0 flex-1">

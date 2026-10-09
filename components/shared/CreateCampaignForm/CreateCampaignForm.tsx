@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -127,9 +128,12 @@ export const CreateCampaignForm: React.FC<CreateCampaignFormProps> = ({
                 >
                   {imagePreview ? (
                     <div className="flex items-center gap-4">
-                      <img
+                      <Image
                         src={imagePreview}
                         alt="Campaign preview"
+                        width={96}
+                        height={96}
+                        unoptimized
                         className="h-24 w-24 rounded-2xl border-2 border-dashed border-gray-300 bg-white p-1 object-cover"
                       />
                       <div className="flex flex-col items-start gap-2">
