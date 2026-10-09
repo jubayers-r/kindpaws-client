@@ -46,7 +46,7 @@ export default function MyDonationsPage() {
     enabled: Boolean(user?.uid),
     queryFn: async () => {
       const res = await axios.get(
-        "https://kind-paws.vercel.app/api/campaigns/my",
+        "/api/campaigns/my",
         {
           params: { id: user?.uid },
         }
@@ -58,7 +58,7 @@ export default function MyDonationsPage() {
   const refundMutation = useMutation({
     mutationFn: async (id: string) => {
       await axios.patch(
-        `https://kind-paws.vercel.app/api/campaigns/refund/${id}`
+        `/api/campaigns/refund/${id}`
       );
     },
     onSuccess: () => {

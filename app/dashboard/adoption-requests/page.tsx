@@ -59,7 +59,7 @@ export default function AdoptionRequestsPage() {
     enabled: Boolean(user?.uid),
     queryFn: () =>
       axios
-        .get("https://kind-paws.vercel.app/api/pets/adoption-requests", {
+        .get("/api/pets/adoption-requests", {
           params: { userId: user?.uid },
         })
         .then((res) => res.data),
@@ -74,7 +74,7 @@ export default function AdoptionRequestsPage() {
       action: "Approved" | "Rejected";
     }) =>
       axios.patch(
-        "https://kind-paws.vercel.app/api/pets/adoption-requests",
+        "/api/pets/adoption-requests",
         { status: action },
         { params: { id } }
       ),
