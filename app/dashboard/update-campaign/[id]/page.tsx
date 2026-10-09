@@ -22,14 +22,14 @@ export default function EditCampaignPage() {
     enabled: Boolean(id),
     queryFn: () =>
       axios
-        .get(`https://kind-paws.vercel.app/api/campaigns/${id}`)
+        .get(`/api/campaigns/${id}`)
         .then((res) => res.data),
   });
 
   const mutation = useMutation({
     mutationFn: async (payload: Record<string, unknown>) => {
       const res = await axios.put(
-        `https://kind-paws.vercel.app/api/campaigns/${id}`,
+        `/api/campaigns/${id}`,
         payload
       );
       return res.data;

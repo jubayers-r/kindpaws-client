@@ -15,7 +15,7 @@ export default function AddPetPage() {
   const mutation = useMutation({
     mutationFn: async (payload: Record<string, unknown>) => {
       const res = await axios.post(
-        "https://kind-paws.vercel.app/api/pets/add-pet",
+        "/api/pets/add-pet",
         payload
       );
       return res.data;

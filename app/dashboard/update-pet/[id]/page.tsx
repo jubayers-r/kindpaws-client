@@ -22,14 +22,14 @@ export default function EditPetPage() {
     enabled: Boolean(id),
     queryFn: () =>
       axios
-        .get(`https://kind-paws.vercel.app/api/pets/${id}`)
+        .get(`/api/pets/${id}`)
         .then((res) => res.data),
   });
 
   const mutation = useMutation({
     mutationFn: async (payload: Record<string, unknown>) => {
       const res = await axios.put(
-        `https://kind-paws.vercel.app/api/pets/${id}`,
+        `/api/pets/${id}`,
         payload
       );
       return res.data;

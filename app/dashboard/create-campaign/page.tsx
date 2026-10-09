@@ -15,7 +15,7 @@ export default function CreateDonationCampaignPage() {
   const mutation = useMutation({
     mutationFn: async (payload: Record<string, unknown>) => {
       const res = await axios.post(
-        "https://kind-paws.vercel.app/api/campaigns/add-campaign",
+        "/api/campaigns/add-campaign",
         payload
       );
       return res.data;
