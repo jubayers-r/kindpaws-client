@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { Accordion } from "@/components/ui/accordion";
 import { AccordionItemComponent } from "@/components/shared/AccordionItemComponent";
 import { FaqItems } from "@/data/FaqItems";
@@ -17,12 +18,20 @@ export const FAQ = () => {
         className="relative pointer-events-none pt-20"
       >
         <div>
-          <img src="/assets/FAQ/about-img-04.png" alt="dog" />
+          <Image
+            src="/assets/FAQ/about-img-04.png"
+            alt="dog"
+            width={500}
+            height={500}
+            className="w-full h-auto object-contain"
+          />
         </div>
-        <img
+        <Image
           src="/assets/FAQ/paw-bg-pattern-white.png"
           alt="bg-paw"
-          className="absolute -top-0 -z-1"
+          width={300}
+          height={300}
+          className="absolute -top-0 -z-1 h-auto"
         />
         <motion.img
           src="/assets/cta/bone-img.png"

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { PawPrint, HeartHandshake, ShieldCheck, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import dog from "@/assets/about-img-dog.png";
@@ -69,10 +70,12 @@ export const AboutUs = () => {
           </div>
 
           <div>
-            <img
-              src={dog.src || "/assets/about-img-dog.png"}
+            <Image
+              src={dog}
               alt="Golden Retriever"
-              className="w-full max-w-xs mx-auto"
+              width={320}
+              height={320}
+              className="w-full max-w-xs mx-auto h-auto object-contain"
             />
           </div>
 

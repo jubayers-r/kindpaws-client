@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 
 type MotionControls = ReturnType<typeof import("motion/react").useAnimation>;
@@ -24,9 +25,12 @@ export const ShinyImage: React.FC<ShinyImageProps> = ({
       animate={extraControls}
       initial={{ filter: "brightness(1)" }}
     >
-      <img
+      <Image
         src={src}
         alt={alt}
+        width={400}
+        height={208}
+        unoptimized={!src.startsWith("/") && !src.includes("i.ibb.co") && !src.includes("firebasestorage.app")}
         className="w-full h-52 object-cover rounded-[1.8rem]"
       />
       <motion.div

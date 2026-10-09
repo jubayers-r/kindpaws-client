@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -63,9 +64,12 @@ export const CampaignCardDescription: React.FC<CampaignCardDescriptionProps> = (
 
         <div className="flex items-center gap-3 mt-3">
           {ownerPhoto && (
-            <img
+            <Image
               src={ownerPhoto}
               alt={ownerName || "Campaign Creator"}
+              width={36}
+              height={36}
+              unoptimized={!ownerPhoto.startsWith("/") && !ownerPhoto.includes("i.ibb.co") && !ownerPhoto.includes("firebasestorage.app")}
               className="w-9 h-9 rounded-full border object-cover"
             />
           )}

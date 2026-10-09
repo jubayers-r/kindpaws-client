@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -55,8 +56,10 @@ export const SwiperComponent = () => {
         {swiperItems.map((item, index) => (
           <SwiperSlide key={item.title} className="overflow-hidden">
             <div className="relative w-full h-full">
-              <img
+              <Image
                 src={item.image}
+                fill
+                priority={index === 0}
                 className="object-cover w-full h-full brightness-85 my-10 sm:my-0"
                 alt={item.title}
               />

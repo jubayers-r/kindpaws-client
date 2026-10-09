@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import TestimonialCard from "./TestimonialCard";
 import { useKeenSlider } from "keen-slider/react";
 import { TestimonialItems } from "@/data/TestimonialItems";
@@ -35,11 +36,12 @@ export const Testimonials = () => {
 
   return (
     <section className="relative py-20">
-      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-full -z-10">
-        <img
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-full -z-10 overflow-hidden">
+        <Image
           src="/assets/testimonial/testimonial-bg.jpg"
           alt="Testimonial background"
-          className="w-full h-full object-cover opacity-10"
+          fill
+          className="object-cover opacity-10"
         />
       </div>
 

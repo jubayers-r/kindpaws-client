@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -44,11 +45,13 @@ function BreadcrumbSegments() {
 
 export const HeroElseComponent = () => {
   return (
-    <div className="-mt-10 -z-10 w-full relative sm:mb-20 mb-10">
-      <img
+    <div className="-mt-10 -z-10 w-full relative sm:mb-20 mb-10 h-[300px] overflow-hidden">
+      <Image
         src="/assets/heroElse/titlebar-bg.jpg"
         alt=""
-        className="object-cover h-[300px] w-full"
+        fill
+        priority
+        className="object-cover"
       />
 
       <div className="absolute top-2/3 w-[95%] 2xl:w-9/11 mx-auto left-0 right-0">

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { MoveUpRight } from "lucide-react";
 import Link from "next/link";
@@ -16,11 +17,19 @@ export const CTA = () => {
           viewport={{ once: true }}
           className="col-span-2 relative pointer-events-none sm:block hidden"
         >
-          <img src="/assets/cta/bg-img.png" alt="dog" />
-          <img
+          <Image
+            src="/assets/cta/bg-img.png"
+            alt="dog"
+            width={700}
+            height={500}
+            className="w-full h-auto object-contain"
+          />
+          <Image
             src="/assets/cta/paw-bg-pattern.png"
             alt="bg-paw"
-            className="absolute top-20"
+            width={300}
+            height={300}
+            className="absolute top-20 h-auto"
           />
           <motion.img
             src="/assets/cta/bone-img.png"

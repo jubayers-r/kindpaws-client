@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -165,11 +166,16 @@ function PetDetailsContent() {
         className="bg-gray-100 p-4 rounded-lg flex items-center gap-4 shadow-sm"
         variants={fadeIn(0.45)}
       >
-        <img
-          src={pet.ownerPhoto}
-          alt={pet.ownerName}
-          className="w-14 h-14 rounded-full object-cover border"
-        />
+        {pet.ownerPhoto && (
+          <Image
+            src={pet.ownerPhoto}
+            alt={pet.ownerName || "Pet Owner"}
+            width={56}
+            height={56}
+            unoptimized={!pet.ownerPhoto.startsWith("/") && !pet.ownerPhoto.includes("i.ibb.co") && !pet.ownerPhoto.includes("firebasestorage.app")}
+            className="w-14 h-14 rounded-full object-cover border"
+          />
+        )}
         <div>
           <div className="font-medium">{pet.ownerName}</div>
           <div className="text-sm text-muted-foreground">{pet.ownerEmail}</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -118,17 +119,21 @@ export const Apointment = () => {
       viewport={{ once: true }}
       className="w-full mx-auto p-6 sm:p-10 bg-white text-secondary shadow-md rounded-[2.5rem] relative overflow-hidden"
     >
-      <img
+      <Image
         src="/assets/cta/paw-bg-pattern.png"
         alt=""
+        width={224}
+        height={224}
         aria-hidden="true"
-        className="pointer-events-none absolute -top-6 -right-4 w-40 sm:w-56 select-none"
+        className="pointer-events-none absolute -top-6 -right-4 w-40 sm:w-56 h-auto select-none"
       />
-      <img
+      <Image
         src="/assets/cta/paw-bg-pattern.png"
         alt=""
+        width={176}
+        height={176}
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-8 -left-6 w-32 sm:w-44 rotate-180 select-none hidden sm:block"
+        className="pointer-events-none absolute -bottom-8 -left-6 w-32 sm:w-44 h-auto rotate-180 select-none hidden sm:block"
       />
 
       <motion.div variants={item} className="mb-3 flex justify-center">

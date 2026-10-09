@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 
 export default function AuthLayout({
@@ -25,10 +26,12 @@ export default function AuthLayout({
             Join our community and help rescue, care for, or adopt a furry
             friend in need.
           </p>
-          <img
+          <Image
             src="https://www.aspca.org/sites/default/files/dog-care_general-dog-care_main-image.jpg"
             alt="Pet"
-            className="rounded-xl shadow-lg"
+            width={384}
+            height={256}
+            className="rounded-xl shadow-lg w-full h-auto object-cover"
           />
         </motion.div>
       </div>
