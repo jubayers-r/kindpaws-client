@@ -12,6 +12,22 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+      },
+      {
+        protocol: "https",
+        hostname: "www.aspca.org",
+      },
+      {
+        protocol: "https",
+        hostname: "**.firebasestorage.app",
+      },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {
