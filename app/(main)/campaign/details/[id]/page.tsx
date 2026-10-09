@@ -11,9 +11,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import PrivateRoute from "@/components/shared/PrivateRoute/PrivateRoute";
 import { Campaign } from "@/types";
 
-export default function CampaignDetailsPage() {
+function CampaignDetailsContent() {
   const params = useParams();
   const id = params?.id as string;
 
@@ -26,7 +27,7 @@ export default function CampaignDetailsPage() {
     enabled: Boolean(id),
     queryFn: async () => {
       const res = await axios.get(
-        `https://kind-paws.vercel.app/api/campaigns/${id}`
+        `/api/campaigns/${id}`
       );
       return res.data;
     },
@@ -147,5 +148,13 @@ export default function CampaignDetailsPage() {
         </div>
       )}
     </motion.div>
+  );
+}
+
+export default function CampaignDetailsPage() {
+  return (
+    <PrivateRoute>
+      <CampaignDetailsContent />
+    </PrivateRoute>
   );
 }

@@ -34,7 +34,7 @@ export default function CampaignsPage() {
   const { data: allCampaigns = [], isLoading } = useQuery<Campaign[]>({
     queryKey: ["campaigns"],
     queryFn: async () => {
-      const res = await axios.get("https://kind-paws.vercel.app/api/campaigns");
+      const res = await axios.get("/api/campaigns");
       return res.data;
     },
   });

@@ -98,7 +98,7 @@ function AdoptContent() {
   const { data: allPets = [], isLoading } = useQuery<Pet[]>({
     queryKey: ["pets"],
     queryFn: async () => {
-      const res = await axios.get("https://kind-paws.vercel.app/api/pets");
+      const res = await axios.get("/api/pets");
       return res.data;
     },
   });

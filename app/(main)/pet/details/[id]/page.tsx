@@ -21,6 +21,7 @@ import axios from "axios";
 import { motion } from "motion/react";
 import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import PrivateRoute from "@/components/shared/PrivateRoute/PrivateRoute";
 import { Pet } from "@/types";
 
 const fadeIn = (delay = 0) => ({
@@ -32,7 +33,7 @@ const fadeIn = (delay = 0) => ({
   },
 });
 
-export default function PetDetailsPage() {
+function PetDetailsContent() {
   const router = useRouter();
   const params = useParams();
   const id = params?.id as string;
@@ -50,7 +51,7 @@ export default function PetDetailsPage() {
     enabled: Boolean(id),
     queryFn: async () => {
       const res = await axios.get(
-        `https://kind-paws.vercel.app/api/pets/${id}`
+        `/api/pets/${id}`
       );
       return res.data;
     },
@@ -66,7 +67,7 @@ export default function PetDetailsPage() {
       address: string;
     }) => {
       const res = await axios.post(
-        `https://kind-paws.vercel.app/api/pets/${id}/adoption-request`,
+        `/api/pets/${id}/adoption-request`,
         payload
       );
       return res.data;
@@ -250,5 +251,13 @@ export default function PetDetailsPage() {
         </DialogContent>
       </Dialog>
     </motion.div>
+  );
+}
+
+export default function PetDetailsPage() {
+  return (
+    <PrivateRoute>
+      <PetDetailsContent />
+    </PrivateRoute>
   );
 }
