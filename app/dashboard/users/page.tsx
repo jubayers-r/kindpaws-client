@@ -34,9 +34,11 @@ import {
 } from "@/components/dashboard/shared/styles";
 import { AppUser } from "@/types";
 
+import AdminRoute from "@/components/shared/AdminRoute/AdminRoute";
+
 const ROWS_PER_PAGE = 10;
 
-export default function UsersTablePage() {
+function UsersTableInner() {
   const authUser = useAuth().user;
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,7 +51,7 @@ export default function UsersTablePage() {
   } = useQuery<AppUser[]>({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://kind-paws.vercel.app/api/users");
+      const res = await fetch("/api/users");
       if (!res.ok) throw new Error("Failed to fetch users");
       return res.json();
     },
@@ -59,7 +61,7 @@ export default function UsersTablePage() {
     mutationFn: async (userId: string) =>
       (
         await axios.patch(
-          `https://kind-paws.vercel.app/api/users/promote`,
+          `/api/users/promote`,
           {},
           { params: { uid: userId } }
         )
@@ -75,7 +77,7 @@ export default function UsersTablePage() {
     mutationFn: async (userId: string) =>
       (
         await axios.patch(
-          `https://kind-paws.vercel.app/api/users/demote`,
+          `/api/users/demote`,
           {},
           { params: { uid: userId } }
         )
@@ -91,7 +93,7 @@ export default function UsersTablePage() {
     mutationFn: async (userId: string) =>
       (
         await axios.patch(
-          `https://kind-paws.vercel.app/api/users/ban`,
+          `/api/users/ban`,
           {},
           { params: { uid: userId } }
         )
@@ -108,7 +110,7 @@ export default function UsersTablePage() {
     mutationFn: async (userId: string) =>
       (
         await axios.patch(
-          `https://kind-paws.vercel.app/api/users/unban`,
+          `/api/users/unban`,
           {},
           { params: { uid: userId } }
         )
@@ -130,8 +132,6 @@ export default function UsersTablePage() {
     (currentPage - 1) * ROWS_PER_PAGE,
     currentPage * ROWS_PER_PAGE
   );
-
-
 
   const actions = (u: AppUser) => (
     <div className="flex flex-wrap items-center justify-center gap-2">
@@ -373,5 +373,13 @@ export default function UsersTablePage() {
         }}
       />
     </div>
+  );
+}
+
+export default function UsersTablePage() {
+  return (
+    <AdminRoute>
+      <UsersTableInner />
+    </AdminRoute>
   );
 }
