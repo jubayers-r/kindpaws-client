@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserRole } from "@/hooks/useUserRole";
-import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 
 interface AdminRouteProps {
   children: React.ReactNode;
