@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import axios from "axios";
 import { toast } from "sonner";
@@ -86,10 +87,7 @@ export default function ProfilePage() {
       if (photoFile) {
         const formData = new FormData();
         formData.append("image", photoFile);
-        const apiKey =
-          process.env.NEXT_PUBLIC_IMGBB_API_KEY ||
-          process.env.VITE_imgbb_apiKey ||
-          "";
+        const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
         const uploadRes = await axios.post(
           `https://api.imgbb.com/1/upload?key=${apiKey}`,
           formData
@@ -156,11 +154,13 @@ export default function ProfilePage() {
         <motion.div {...rise()}>
           <Card className={`${CARD} gap-0 overflow-hidden px-0 py-0`}>
             <div className="relative bg-secondary px-6 py-8 sm:px-8">
-              <img
+              <Image
                 src="/assets/FAQ/paw-bg-pattern-white.png"
                 alt=""
+                width={160}
+                height={160}
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rotate-12 opacity-10"
+                className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rotate-12 opacity-10 object-contain"
               />
               <div className="relative flex items-center gap-4">
                 <Avatar className="h-20 w-20 border-2 border-white/30">

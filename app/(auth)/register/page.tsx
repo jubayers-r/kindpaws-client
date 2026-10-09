@@ -53,10 +53,7 @@ function RegisterForm() {
     const formData = new FormData();
     formData.append("image", imageFile);
 
-    const apiKey =
-      process.env.NEXT_PUBLIC_IMGBB_API_KEY ||
-      process.env.VITE_imgbb_apiKey ||
-      "";
+    const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
     const imgUpload = `https://api.imgbb.com/1/upload?key=${apiKey}`;
 
     const res = await axios.post(imgUpload, formData);

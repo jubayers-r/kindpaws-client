@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -34,10 +35,7 @@ function CampaignDetailsContent() {
   });
 
   const stripePromise = useMemo(() => {
-    const key =
-      process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY ||
-      process.env.VITE_STRIPE_PUBLIC_KEY ||
-      "";
+    const key = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "";
     return key ? loadStripe(key) : null;
   }, []);
 
@@ -109,11 +107,16 @@ function CampaignDetailsContent() {
       )}
 
       <div className="bg-gray-100 p-4 rounded-lg flex items-center gap-4 shadow-sm">
-        <img
-          src={campaign.ownerPhoto}
-          alt={campaign.ownerName}
-          className="w-14 h-14 rounded-full object-cover"
-        />
+        {campaign.ownerPhoto && (
+          <Image
+            src={campaign.ownerPhoto}
+            alt={campaign.ownerName || "Campaign Creator"}
+            width={56}
+            height={56}
+            unoptimized={!campaign.ownerPhoto.startsWith("/") && !campaign.ownerPhoto.includes("i.ibb.co") && !campaign.ownerPhoto.includes("firebasestorage.app")}
+            className="w-14 h-14 rounded-full object-cover"
+          />
+        )}
         <div>
           <div className="font-medium">{campaign.ownerName}</div>
         </div>
