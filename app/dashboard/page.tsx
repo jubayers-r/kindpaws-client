@@ -67,7 +67,7 @@ function UserOverview() {
     enabled: Boolean(user?.uid),
     queryFn: async () => {
       const res = await fetch(
-        `https://kind-paws.vercel.app/api/stats/user-overview?uid=${user?.uid}`
+        `/api/stats/user-overview?uid=${user?.uid}`
       );
       if (!res.ok) throw new Error("Failed to fetch your dashboard");
       const stats = await res.json();

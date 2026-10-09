@@ -1,8 +1,8 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { Home, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,8 @@ import { dashboardNavItems } from "@/data/DashboardNavItems";
 import DashboardTopNavbar from "@/components/dashboard/DashboardTopNavbar/DashboardTopNavbar";
 import { AuthRoleProvider } from "@/context/role/AuthRoleProvider";
 import { useUserRole } from "@/hooks/useUserRole";
+import { useAuth } from "@/hooks/useAuth";
+import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 import RouteFallback from "@/components/shared/RouteFallback";
 
 const itemClass = (isActive: boolean) =>
@@ -73,11 +75,22 @@ function DashboardNavItemsList() {
   );
 }
 
-export default function DashboardLayout({
+function DashboardLayoutContent({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { user, loading: authLoading, setStateData } = useAuth();
+
+  useEffect(() => {
+    setStateData(pathname);
+    if (!authLoading && !user) {
+      router.replace(`/login?from=${encodeURIComponent(pathname)}`);
+    }
+  }, [user, authLoading, pathname, router, setStateData]);
+
   const homeLink = (
     <Button
       variant="outline"
@@ -103,6 +116,14 @@ export default function DashboardLayout({
       </Button>
     </SheetTrigger>
   );
+
+  if (authLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background font-[family-name:var(--font-laila)]">
@@ -155,5 +176,17 @@ export default function DashboardLayout({
         </SheetContent>
       </Sheet>
     </div>
+  );
+}
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <Suspense fallback={<LoadingScreen isLoading={true} />}>
+      <DashboardLayoutContent>{children}</DashboardLayoutContent>
+    </Suspense>
   );
 }

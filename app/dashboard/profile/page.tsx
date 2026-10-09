@@ -34,7 +34,7 @@ interface DetailRowProps {
 }
 
 const DetailRow = ({ label, value, mono }: DetailRowProps) => (
-  <div className="flex flex-col gap-1 border-t py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+  <div className="flex flex-col gap-1 border-t first:border-t-0 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
     <dt className="text-sm font-medium text-muted-foreground">{label}</dt>
     <dd
       className={`text-sm text-secondary sm:text-right ${
@@ -104,7 +104,7 @@ export default function ProfilePage() {
 
       if (user?.uid) {
         await axios.patch(
-          `https://kind-paws.vercel.app/api/users/profile/${user.uid}`,
+          `/api/users/profile/${user.uid}`,
           { name: trimmed, image: photoURL }
         );
       }
@@ -156,6 +156,12 @@ export default function ProfilePage() {
         <motion.div {...rise()}>
           <Card className={`${CARD} gap-0 overflow-hidden px-0 py-0`}>
             <div className="relative bg-secondary px-6 py-8 sm:px-8">
+              <img
+                src="/assets/FAQ/paw-bg-pattern-white.png"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rotate-12 opacity-10"
+              />
               <div className="relative flex items-center gap-4">
                 <Avatar className="h-20 w-20 border-2 border-white/30">
                   <AvatarImage src={user.photoURL || ""} className="object-cover" />
