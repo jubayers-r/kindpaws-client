@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -27,8 +28,20 @@ import { CARD, rise } from "@/components/dashboard/shared/styles";
 import { Loader2, UploadCloud, X } from "lucide-react";
 import { Pet } from "@/types";
 
-const categoryOptions = ["Dog", "Cat", "Bird", "Rabbit"];
-const genderOptions = ["Male", "Female", "Other"];
+const categoryOptions = ["Dog", "Cat", "Bird", "Rabbit"] as const;
+const genderOptions = ["Male", "Female", "Other"] as const;
+
+const petSchema = z.object({
+  name: z.string().min(1, "Pet name is required"),
+  age: z.string().min(1, "Pet age is required"),
+  gender: z.string().min(1, "Please pick a gender"),
+  category: z.string().min(1, "Please pick a category"),
+  location: z.string().min(1, "Location is required"),
+  shortDescription: z.string().min(1, "Short description is required"),
+  longDescription: z.string().min(1, "Detailed description is required"),
+});
+
+type PetFormValues = z.infer<typeof petSchema>;
 
 interface PetFormProps {
   initialData?: Pet | null;
@@ -53,62 +66,58 @@ export const PetForm: React.FC<PetFormProps> = ({
 
   const isEditPage = pathname === `/dashboard/update-pet/${id}`;
 
+  const matchedCategory =
+    categoryOptions.find(
+      (opt) => opt.toLowerCase() === initialData?.category?.toLowerCase()
+    ) || "";
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors, isSubmitting: isFormSubmitting },
+  } = useForm<PetFormValues>({
+    resolver: zodResolver(petSchema),
+    defaultValues: {
+      name: initialData?.name || "",
+      age: initialData?.age || "",
+      gender: initialData?.gender || "",
+      category: matchedCategory,
+      location: initialData?.location || "",
+      shortDescription: initialData?.shortDescription || "",
+      longDescription: initialData?.longDescription || "",
+    },
+  });
+
   const editor = useEditor({
     extensions: [StarterKit],
     content: initialData?.longDescription || "",
     immediatelyRender: false,
     onUpdate: ({ editor: ed }) => {
-      formik.setFieldValue("longDescription", ed.getHTML());
+      setValue("longDescription", ed.getHTML(), { shouldValidate: true });
     },
   });
 
-  const formik = useFormik({
-    initialValues: {
-      name: initialData?.name || "",
-      age: initialData?.age || "",
-      gender: initialData?.gender || "",
-      category:
-        categoryOptions.find(
-          (opt) => opt.toLowerCase() === initialData?.category?.toLowerCase()
-        ) || "",
-      location: initialData?.location || "",
-      shortDescription: initialData?.shortDescription || "",
-      longDescription: initialData?.longDescription || "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required("Pet name is required"),
-      age: Yup.string().required("Pet age is required"),
-      gender: Yup.string().required("Please pick a gender"),
-      category: Yup.string().required("Please pick a category"),
-      location: Yup.string().required("Location is required"),
-      shortDescription: Yup.string().required("Short description is required"),
-      longDescription: Yup.string().required("Detailed description is required"),
-    }),
-    onSubmit: (values) => {
-      if (!imageURL) {
-        setImageError("A photo is required");
-        return;
-      }
-      setImageError("");
 
-      const payload = {
-        ...values,
-        image: imageURL,
-        isAdopted: initialData?.isAdopted || false,
-        ownerId: initialData?.ownerId || user?.uid,
-        ownerName: initialData?.ownerName || user?.displayName,
-        ownerEmail: initialData?.ownerEmail || user?.email,
-        ownerPhoto: initialData?.ownerPhoto || user?.photoURL,
-      };
-      onSubmit(payload);
-      formik.setSubmitting(false);
-    },
-  });
+  const handleFormSubmit = async (values: PetFormValues) => {
+    if (!imageURL) {
+      setImageError("A photo is required");
+      return;
+    }
+    setImageError("");
 
-  const err = (field: keyof typeof formik.values) =>
-    formik.touched[field] && formik.errors[field]
-      ? formik.errors[field]
-      : undefined;
+    const payload = {
+      ...values,
+      image: imageURL,
+      isAdopted: initialData?.isAdopted || false,
+      ownerId: initialData?.ownerId || user?.uid,
+      ownerName: initialData?.ownerName || user?.displayName,
+      ownerEmail: initialData?.ownerEmail || user?.email,
+      ownerPhoto: initialData?.ownerPhoto || user?.photoURL,
+    };
+    await onSubmit(payload);
+  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = e.target.files?.[0];
@@ -118,7 +127,9 @@ export const PetForm: React.FC<PetFormProps> = ({
     formData.append("image", imageFile);
     try {
       setUploading(true);
-      const key = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "d3aac2d3f145f2ff181135ea8a0ba76b";
+      const key =
+        process.env.NEXT_PUBLIC_IMGBB_API_KEY ||
+        "d3aac2d3f145f2ff181135ea8a0ba76b";
       const imgUpload = `https://api.imgbb.com/1/upload?key=${key}`;
       const res = await axios.post(imgUpload, formData);
       const data = res.data;
@@ -137,13 +148,13 @@ export const PetForm: React.FC<PetFormProps> = ({
     }
   };
 
-  const busy = isSubmitting || formik.isSubmitting || uploading;
+  const busy = isSubmitting || isFormSubmitting || uploading;
 
   return (
     <motion.div {...rise()}>
       <Card className={`${CARD} mx-auto max-w-3xl gap-0 px-0 py-0`}>
         <CardContent className="p-6 sm:p-8">
-          <form onSubmit={formik.handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
             <FormField
               label="Pet photo"
               required
@@ -208,71 +219,81 @@ export const PetForm: React.FC<PetFormProps> = ({
             </FormField>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <FormField label="Pet name" required error={err("name")}>
+              <FormField label="Pet name" required error={errors.name?.message}>
                 <Input
                   id="name"
                   placeholder="e.g. Max"
-                  {...formik.getFieldProps("name")}
-                  aria-invalid={Boolean(err("name"))}
+                  {...register("name")}
+                  aria-invalid={Boolean(errors.name)}
                 />
               </FormField>
 
-              <FormField label="Age" required error={err("age")}>
+              <FormField label="Age" required error={errors.age?.message}>
                 <Input
                   id="age"
                   placeholder="e.g. 5 months"
-                  {...formik.getFieldProps("age")}
-                  aria-invalid={Boolean(err("age"))}
+                  {...register("age")}
+                  aria-invalid={Boolean(errors.age)}
                 />
               </FormField>
 
-              <FormField label="Gender" required error={err("gender")}>
-                <Select
-                  value={formik.values.gender}
-                  onValueChange={(val) => formik.setFieldValue("gender", val)}
-                >
-                  <SelectTrigger id="gender" className="w-full">
-                    <SelectValue placeholder="Select gender" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {genderOptions.map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <FormField label="Gender" required error={errors.gender?.message}>
+                <Controller
+                  name="gender"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger id="gender" className="w-full">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genderOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt}>
+                            {opt}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </FormField>
 
-              <FormField label="Category" required error={err("category")}>
-                <Select
-                  value={formik.values.category}
-                  onValueChange={(val) => formik.setFieldValue("category", val)}
-                >
-                  <SelectTrigger id="category" className="w-full">
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categoryOptions.map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <FormField
+                label="Category"
+                required
+                error={errors.category?.message}
+              >
+                <Controller
+                  name="category"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger id="category" className="w-full">
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categoryOptions.map((opt) => (
+                          <SelectItem key={opt} value={opt}>
+                            {opt}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </FormField>
 
               <FormField
                 label="Location"
                 required
-                error={err("location")}
+                error={errors.location?.message}
                 className="sm:col-span-2"
               >
                 <Input
                   id="location"
                   placeholder="City, Country"
-                  {...formik.getFieldProps("location")}
-                  aria-invalid={Boolean(err("location"))}
+                  {...register("location")}
+                  aria-invalid={Boolean(errors.location)}
                 />
               </FormField>
             </div>
@@ -280,22 +301,22 @@ export const PetForm: React.FC<PetFormProps> = ({
             <FormField
               label="Short description"
               required
-              error={err("shortDescription")}
+              error={errors.shortDescription?.message}
               hint="One line shown on the pet card"
             >
               <Textarea
                 id="shortDescription"
                 rows={2}
                 placeholder="Friendly golden retriever who loves kids"
-                {...formik.getFieldProps("shortDescription")}
-                aria-invalid={Boolean(err("shortDescription"))}
+                {...register("shortDescription")}
+                aria-invalid={Boolean(errors.shortDescription)}
               />
             </FormField>
 
             <FormField
               label="Detailed description"
               required
-              error={err("longDescription")}
+              error={errors.longDescription?.message}
               hint="Supports markdown shortcuts (## for headings, ** for bold)"
             >
               <div className="min-h-[160px] rounded-md border bg-transparent p-3 shadow-xs transition focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50">
@@ -322,7 +343,7 @@ export const PetForm: React.FC<PetFormProps> = ({
                 {busy && <Loader2 className="h-4 w-4 animate-spin" />}
                 {uploading
                   ? "Uploading photo…"
-                  : isSubmitting || formik.isSubmitting
+                  : isSubmitting || isFormSubmitting
                   ? "Saving…"
                   : initialData
                   ? "Save changes"

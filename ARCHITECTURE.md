@@ -12,7 +12,7 @@ Describe the actual architecture of KindPaws Client. Update this document when a
 - UI: shadcn/ui (Radix UI primitives), Tailwind CSS v4, Motion (framer-motion), Lucide React
 - State and Data Fetching: TanStack Query v5 (@tanstack/react-query), Axios
 - Authentication: Firebase Authentication v13 (JWT token synchronization with backend)
-- Forms: React Hook Form
+- Forms and Validation: React Hook Form + Zod (@hookform/resolvers/zod)
 - Payments: Stripe (@stripe/stripe-js, @stripe/react-stripe-js)
 - Media: ImgBB API for direct image uploads
 
