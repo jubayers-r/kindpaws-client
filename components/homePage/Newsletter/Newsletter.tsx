@@ -50,11 +50,11 @@ export const Newsletter = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Address"
-            className="rounded-none border-none focus-visible:ring-0 focus-visible:ring-offset-0 px-10 py-8 flex-grow text-gray-700"
+            className="rounded-none rounded-l-full border-0 border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus-visible:outline-none px-10 py-8 flex-grow text-gray-700 bg-transparent"
           />
           <Button
             type="submit"
-            className="rounded-none rounded-r-full bg-primary hover:bg-secondary text-white px-6 py-8 text-sm font-semibold tracking-wide"
+            className="rounded-none rounded-r-full bg-primary hover:bg-secondary text-white px-6 py-8 text-sm font-semibold tracking-wide border-0 shadow-none outline-none focus-visible:ring-0"
           >
             DISCOVER NOW <Send className="w-4 h-4 ml-2" />
           </Button>

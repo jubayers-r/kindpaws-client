@@ -32,9 +32,10 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
           &ldquo;{quote}&rdquo;
         </blockquote>
 
+        {/* User Info */}
         <div className="flex items-center gap-4 pt-4">
-          <Avatar>
-            <AvatarImage src={imgSrc} alt={adopterName} />
+          <Avatar className="size-20">
+            <AvatarImage src={imgSrc} alt={adopterName} className="object-cover" />
             <AvatarFallback>{adopterName?.[0] || "U"}</AvatarFallback>
           </Avatar>
           <div>

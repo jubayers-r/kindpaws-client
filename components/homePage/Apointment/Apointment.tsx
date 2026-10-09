@@ -130,14 +130,6 @@ export const Apointment = () => {
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-8 -left-6 w-32 sm:w-44 rotate-180 select-none hidden sm:block"
       />
-      <motion.img
-        src="/assets/cta/bone-img.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute w-12 sm:w-16 bottom-6 right-8 opacity-90 select-none hidden sm:block"
-        animate={{ rotate: [-15, 20, -15], scale: [1, 1.1, 1] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-      />
 
       <motion.div variants={item} className="mb-3 flex justify-center">
         <div className="bg-primary/10 rounded-full w-fit px-5 py-1 flex items-center gap-2">
