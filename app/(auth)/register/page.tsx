@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { User as UserIcon, Mail } from "lucide-react";
+import { User as UserIcon, Mail, Loader2 } from "lucide-react";
 import PasswordInput from "@/components/shared/PasswordInput/PasswordInput";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -197,7 +197,16 @@ function RegisterForm() {
                   <p className="text-sm text-red-500 mt-1">{submitError}</p>
                 )}
 
-                <Button className="w-full mt-4">Register</Button>
+                <Button type="submit" className="w-full mt-4" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Creating account…
+                    </>
+                  ) : (
+                    "Register"
+                  )}
+                </Button>
               </form>
 
               <p className="text-sm text-center mt-4 text-muted-foreground">

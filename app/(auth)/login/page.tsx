@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { auth } from "@/firebase/firebase.init";
 import { useAuth } from "@/hooks/useAuth";
 import axios from "axios";
-import { Mail } from "lucide-react";
+import { Mail, Loader2 } from "lucide-react";
 import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -140,8 +140,15 @@ function LoginForm() {
 
                 <PasswordInput register={register} errors={errors} />
 
-                <Button type="submit" className="w-full mt-4">
-                  Login
+                <Button type="submit" className="w-full mt-4" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Logging in…
+                    </>
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
               </form>
 
