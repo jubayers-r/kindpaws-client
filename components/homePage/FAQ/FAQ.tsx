@@ -51,7 +51,7 @@ export const FAQ = () => {
 
       <div>
         <div className="bg-white rounded-full w-fit px-5 py-1 mb-2">
-          <p className="text-secondary text-sm font-[Roboto] flex items-center justify-center gap-2">
+          <p className="text-secondary text-sm flex items-center justify-center gap-2">
             <PawPrint className="text-primary" />
             <span className="uppercase text-sm font-semibold text-primary">
               Any FAQ
