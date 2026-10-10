@@ -1,6 +1,6 @@
 "use client";
 
-import { MoveUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Logo, LogoBlack } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import MobileMenu from "./MobileMenu";
@@ -96,12 +96,13 @@ function NavbarContent() {
           } ${scrolled ? "bg-black/30" : "bg-gray-300"}`}
         />
         {!user && (
-          <Link href="/contact-us">
+          <Link href="/contact-us" className="group">
             <Button
               variant="outline"
-              className="hidden xl:inline-flex px-6 py-4 min-w-[170px] items-center justify-center gap-2 rounded-full border border-black/10 bg-white hover:bg-amber-500 text-black hover:text-white"
+              className="hidden xl:inline-flex px-6 py-4 min-w-[170px] items-center justify-center gap-2 rounded-full border border-black/10 bg-white hover:bg-amber-500 text-black hover:text-white transition-all duration-300"
             >
-              Get In Touch <MoveUpRight />
+              <span>Get In Touch</span>
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
           </Link>
         )}

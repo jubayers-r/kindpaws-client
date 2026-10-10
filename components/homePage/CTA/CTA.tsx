@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { MoveUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export const CTA = () => {
@@ -73,7 +73,7 @@ export const CTA = () => {
               className="h-auto gap-3 rounded-full bg-primary px-7 py-6 text-base font-semibold text-white shadow-md shadow-primary/30 transition-all duration-300 hover:-translate-y-1 hover:bg-secondary hover:shadow-lg hover:shadow-secondary/40 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:text-xl [&_svg]:size-5 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:-translate-y-0.5 group-hover:[&_svg]:translate-x-0.5"
             >
               Find Your New Best Friend
-              <MoveUpRight />
+              <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
           </Link>
         </motion.div>
