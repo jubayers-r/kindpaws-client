@@ -18,7 +18,7 @@ import {
   Clock,
   Dog,
   Mail,
-  MoveUpRight,
+  ArrowUpRight,
   PawPrint,
   Phone,
   User,
@@ -269,12 +269,12 @@ export const Apointment = () => {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-full justify-start rounded-full px-5 py-3 h-auto bg-[#f9f5ef] text-sm text-gray-700 hover:text-gray-700 hover:bg-[#f9f5ef] ${
+                className={`w-full justify-between items-center rounded-full px-5 py-3 h-auto bg-[#f9f5ef] text-sm text-gray-700 hover:text-gray-700 hover:bg-[#f9f5ef] ${
                   errors.date ? "border-2 border-destructive" : "border-transparent"
                 }`}
               >
-                <CalendarIcon className="mr-2 h-4 w-4 text-primary" />
-                {date ? date.toLocaleDateString() : "mm/dd/yyyy"}
+                <span>{date ? date.toLocaleDateString() : "mm/dd/yyyy"}</span>
+                <CalendarIcon className="h-4 w-4 text-gray-500 shrink-0" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0 w-fit border-none" align="start">
@@ -314,7 +314,7 @@ export const Apointment = () => {
               errors.time ? "border-2 border-destructive" : "border-transparent"
             }`}
           >
-            <Clock className="mr-2 h-4 w-4 text-primary shrink-0" />
+            <Clock className="mr-2 h-4 w-4 text-gray-500 shrink-0" />
             <input
               id="appt-time"
               type="time"
@@ -338,10 +338,10 @@ export const Apointment = () => {
         >
           <Button
             onClick={handleReservation}
-            className="bg-primary text-white hover:bg-secondary rounded-full px-7 py-3 h-auto text-base font-semibold gap-2"
+            className="group bg-primary text-white hover:bg-secondary rounded-full px-7 py-3 h-auto text-base font-semibold gap-2 transition-all duration-300 shadow-md shadow-primary/25"
           >
-            Start A Reservation
-            <MoveUpRight className="w-4 h-4" />
+            <span>Start A Reservation</span>
+            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Button>
         </motion.div>
       </motion.div>

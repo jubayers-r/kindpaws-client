@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import FormField from "@/components/dashboard/shared/FormField";
 import { CARD, rise } from "@/components/dashboard/shared/styles";
-import { Loader2, UploadCloud, X } from "lucide-react";
+import { Loader2, UploadCloud, X, Calendar } from "lucide-react";
 import { Campaign } from "@/types";
 
 const campaignSchema = z.object({
@@ -75,9 +75,7 @@ export const CreateCampaignForm: React.FC<CreateCampaignFormProps> = ({
   const uploadImageToImgbb = async (file: File) => {
     const formData = new FormData();
     formData.append("image", file);
-    const key =
-      process.env.NEXT_PUBLIC_IMGBB_API_KEY ||
-      "d3aac2d3f145f2ff181135ea8a0ba76b";
+    const key = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
     const url = `https://api.imgbb.com/1/upload?key=${key}`;
     const res = await axios.post(url, formData, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -264,12 +262,28 @@ export const CreateCampaignForm: React.FC<CreateCampaignFormProps> = ({
                 required
                 error={errors.deadline?.message}
               >
-                <Input
-                  id="deadline"
-                  type="date"
-                  {...register("deadline")}
-                  aria-invalid={Boolean(errors.deadline)}
-                />
+                <div
+                  className="relative cursor-pointer"
+                  onClick={(e) => {
+                    const input = e.currentTarget.querySelector("input");
+                    if (input && "showPicker" in input) {
+                      try {
+                        (input as HTMLInputElement & { showPicker?: () => void }).showPicker?.();
+                      } catch {
+                        input.focus();
+                      }
+                    }
+                  }}
+                >
+                  <Input
+                    id="deadline"
+                    type="date"
+                    {...register("deadline")}
+                    aria-invalid={Boolean(errors.deadline)}
+                    className="cursor-pointer pr-10 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                  />
+                  <Calendar className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                </div>
               </FormField>
 
               <FormField
