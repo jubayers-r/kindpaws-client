@@ -24,7 +24,9 @@ export const MainShell: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   return (
     <div>
-      <NavigationLoading />
+      <Suspense fallback={null}>
+        <NavigationLoading />
+      </Suspense>
       <div className="flex flex-col font-body">
         <Navbar />
         <Suspense fallback={<Hero><HeroElseComponent /></Hero>}>

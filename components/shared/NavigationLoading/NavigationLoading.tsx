@@ -2,18 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { useIsFetching } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 const SHOW_DELAY_MS = 200;
 
 export const NavigationLoading = () => {
   const isFetching = useIsFetching();
+  const pathname = usePathname();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    if (isFetching === 0) {
+    // Do not pop up full-screen blocking overlay over landing page background queries
+    if (pathname === "/" || isFetching === 0) {
       timer = setTimeout(() => setShow(false), 0);
     } else {
       timer = setTimeout(() => setShow(true), SHOW_DELAY_MS);
@@ -22,7 +25,7 @@ export const NavigationLoading = () => {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [isFetching]);
+  }, [isFetching, pathname]);
 
   return <LoadingScreen isLoading={show} />;
 };

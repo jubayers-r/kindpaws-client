@@ -1,49 +1,31 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { API_BASE_URL } from "@/lib/axiosSecure";
+import { Pet } from "@/types";
 
 const normalize = (v: string) => (v || "").trim().toLowerCase().replace(/s$/, "");
 
 export const Categories = () => {
-  const [petCounts, setPetCounts] = useState<Record<string, number> | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-    const controller = new AbortController();
-
-    fetch(`${API_BASE_URL}/api/pets`, {
-      signal: controller.signal,
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        if (!mounted) return;
-        const pets = Array.isArray(data) ? data : data?.value || [];
-        if (!Array.isArray(pets)) throw new Error("Unexpected response shape");
-        const counts: Record<string, number> = {};
-        pets.forEach((pet) => {
-          if (!pet?.category) return;
-          const key = normalize(pet.category);
-          counts[key] = (counts[key] || 0) + 1;
-        });
-        setPetCounts(counts);
-      })
-      .catch((err) => {
-        if (!mounted || err?.name === "AbortError") return;
-        console.error("Failed to load pet counts for Categories:", err);
-        setPetCounts({});
+  const { data: petCounts = {} } = useQuery<Record<string, number>>({
+    queryKey: ["categoryPetCounts"],
+    queryFn: async () => {
+      const res = await fetch(`${API_BASE_URL}/api/pets`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const pets: Pet[] = Array.isArray(data) ? data : data?.value || [];
+      const counts: Record<string, number> = {};
+      pets.forEach((pet) => {
+        if (!pet?.category) return;
+        const key = normalize(pet.category);
+        counts[key] = (counts[key] || 0) + 1;
       });
-
-    return () => {
-      mounted = false;
-      controller.abort();
-    };
-  }, []);
+      return counts;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes cache
+  });
 
   const petCategories = [
     { img: "/assets/categories/reptiles.png", category: "Reptile", color: "bg-[#e2f1d2]" },
@@ -83,8 +65,7 @@ export const Categories = () => {
     img: string,
     category: string
   ) => {
-    const displayCount =
-      petCounts === null ? "…" : (petCounts[normalize(category)] ?? 0);
+    const displayCount = petCounts[normalize(category)] ?? 0;
     return (
       <Link
         key={index}
