@@ -3,14 +3,22 @@
 import { AnimatePresence, motion } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 
-const MIN_SHOW_MS = 2600; // one full paw pulse cycle (2.5s) + margin
+import { cn } from "@/lib/utils";
+
+const DEFAULT_MIN_SHOW_MS = 2600; // one full paw pulse cycle (2.5s) + margin
 
 interface LoadingScreenProps {
   isLoading: boolean;
+  minShowMs?: number;
+  className?: string;
 }
 
-export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
-  const [visible, setVisible] = useState(false);
+export const LoadingScreen: React.FC<LoadingScreenProps> = ({
+  isLoading,
+  minShowMs = DEFAULT_MIN_SHOW_MS,
+  className,
+}) => {
+  const [visible, setVisible] = useState(isLoading);
   const shownAtRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -22,7 +30,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
     } else {
       const shownAt = shownAtRef.current;
       if (shownAt !== null) {
-        const remaining = MIN_SHOW_MS - (Date.now() - shownAt);
+        const remaining = minShowMs - (Date.now() - shownAt);
         if (remaining <= 0) {
           shownAtRef.current = null;
           setVisible(false);
@@ -38,13 +46,16 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [isLoading]);
+  }, [isLoading, minShowMs]);
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] bg-background flex items-center justify-center"
+          className={cn(
+            "fixed inset-0 z-[100] bg-background flex items-center justify-center",
+            className
+          )}
           role="status"
           aria-label="Loading"
           initial={{ opacity: 1 }}

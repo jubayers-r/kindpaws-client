@@ -1,13 +1,5 @@
-import { Loader2 } from "lucide-react";
+import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 
 export default function Loading() {
-  return (
-    <div
-      className="flex min-h-[50vh] items-center justify-center"
-      role="status"
-      aria-label="Loading page content"
-    >
-      <Loader2 className="h-8 w-8 animate-spin text-primary" />
-    </div>
-  );
+  return <LoadingScreen isLoading={true} />;
 }

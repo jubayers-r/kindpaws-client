@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, Suspense } from "react";
 import { useInView } from "react-intersection-observer";
 import CardComponent from "@/components/shared/CardComponent/CardComponent";
 import SkeletonCardComponent from "@/components/shared/CardComponent/SkeletonCardComponent";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Campaign } from "@/types";
+import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -30,7 +31,7 @@ const useGridColumns = () => {
   return columns;
 };
 
-export default function CampaignsPage() {
+function CampaignsContent() {
   const { data: allCampaigns = [], isLoading } = useQuery<Campaign[]>({
     queryKey: ["campaigns"],
     queryFn: async () => {
@@ -92,6 +93,10 @@ export default function CampaignsPage() {
     }
   }, [inView, totalCampaigns, hasMoreToLoad]);
 
+  if (isLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
   return (
     <>
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12 dark:text-primary-foreground">
@@ -112,11 +117,7 @@ export default function CampaignsPage() {
       </div>
 
       <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-5">
-        {isLoading ? (
-          Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCardComponent key={`loading-camp-${i}`} />
-          ))
-        ) : visibleCampaigns.length > 0 ? (
+        {visibleCampaigns.length > 0 ? (
           <>
             {visibleCampaigns.map((campaign, i) => (
               <CardComponent
@@ -134,11 +135,21 @@ export default function CampaignsPage() {
             No campaigns match “{searchTerm.trim()}”.
           </p>
         ) : (
-          <SkeletonCardComponent />
+          <p className="col-span-full py-10 text-center text-gray-600 dark:text-gray-300">
+            No campaigns found.
+          </p>
         )}
       </div>
 
       {filteredCampaigns.length > 0 && <div ref={ref} aria-hidden="true" />}
     </>
+  );
+}
+
+export default function CampaignsPage() {
+  return (
+    <Suspense fallback={<LoadingScreen isLoading={true} />}>
+      <CampaignsContent />
+    </Suspense>
   );
 }

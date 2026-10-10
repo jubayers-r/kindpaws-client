@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Pet } from "@/types";
+import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -165,6 +166,10 @@ function AdoptContent() {
     }
   }, [inView, totalPets, hasMoreToLoad]);
 
+  if (isLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
   return (
     <>
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12 dark:text-white">
@@ -197,11 +202,7 @@ function AdoptContent() {
       </div>
 
       <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
-        {isLoading ? (
-          Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCardComponent key={`loading-skeleton-${i}`} />
-          ))
-        ) : visiblePets.length > 0 ? (
+        {visiblePets.length > 0 ? (
           <>
             {visiblePets.map((pet, i) => (
               <CardComponent key={`${pet._id}-${i}`} data={pet} type="pet" />
@@ -211,7 +212,9 @@ function AdoptContent() {
             ))}
           </>
         ) : (
-          <SkeletonCardComponent />
+          <p className="col-span-full py-10 text-center text-gray-600 dark:text-gray-300">
+            No pets found.
+          </p>
         )}
       </div>
 
@@ -222,15 +225,7 @@ function AdoptContent() {
 
 export default function AdoptPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCardComponent key={`suspense-skeleton-${i}`} />
-          ))}
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingScreen isLoading={true} />}>
       <AdoptContent />
     </Suspense>
   );
