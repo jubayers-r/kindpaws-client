@@ -166,12 +166,9 @@ function AdoptContent() {
     }
   }, [inView, totalPets, hasMoreToLoad]);
 
-  if (isLoading) {
-    return <LoadingScreen isLoading={true} />;
-  }
-
   return (
     <>
+      <LoadingScreen isLoading={isLoading} />
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12 dark:text-white">
         Adopt a New Family Member
       </h1>

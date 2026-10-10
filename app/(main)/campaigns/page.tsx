@@ -93,12 +93,9 @@ function CampaignsContent() {
     }
   }, [inView, totalCampaigns, hasMoreToLoad]);
 
-  if (isLoading) {
-    return <LoadingScreen isLoading={true} />;
-  }
-
   return (
     <>
+      <LoadingScreen isLoading={isLoading} />
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8 sm:mb-12 dark:text-primary-foreground">
         Save a Paw, Change a Life
       </h1>

@@ -25,7 +25,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     if (isLoading) {
-      if (shownAtRef.current === null) shownAtRef.current = Date.now();
+      shownAtRef.current = Date.now();
       timer = setTimeout(() => setVisible(true), 0);
     } else {
       const shownAt = shownAtRef.current;
