@@ -25,7 +25,21 @@ import {
 } from "@/components/ui/select";
 import FormField from "@/components/dashboard/shared/FormField";
 import { CARD, rise } from "@/components/dashboard/shared/styles";
-import { Loader2, UploadCloud, X } from "lucide-react";
+import {
+  Loader2,
+  UploadCloud,
+  X,
+  Bold,
+  Italic,
+  Strikethrough,
+  Heading2,
+  Heading3,
+  List,
+  ListOrdered,
+  Quote,
+  Undo,
+  Redo,
+} from "lucide-react";
 import { Pet } from "@/types";
 
 const categoryOptions = ["Dog", "Cat", "Bird", "Rabbit"] as const;
@@ -94,6 +108,12 @@ export const PetForm: React.FC<PetFormProps> = ({
     extensions: [StarterKit],
     content: initialData?.longDescription || "",
     immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        class:
+          "min-h-[180px] p-3 text-sm focus:outline-none focus:ring-0 [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5 [&>h2]:text-lg [&>h2]:font-bold [&>h2]:mb-2 [&>h3]:text-base [&>h3]:font-semibold [&>h3]:mb-1 [&>blockquote]:border-l-2 [&>blockquote]:border-primary [&>blockquote]:pl-3 [&>blockquote]:italic",
+      },
+    },
     onUpdate: ({ editor: ed }) => {
       setValue("longDescription", ed.getHTML(), { shouldValidate: true });
     },
@@ -127,9 +147,7 @@ export const PetForm: React.FC<PetFormProps> = ({
     formData.append("image", imageFile);
     try {
       setUploading(true);
-      const key =
-        process.env.NEXT_PUBLIC_IMGBB_API_KEY ||
-        "d3aac2d3f145f2ff181135ea8a0ba76b";
+      const key = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
       const imgUpload = `https://api.imgbb.com/1/upload?key=${key}`;
       const res = await axios.post(imgUpload, formData);
       const data = res.data;
@@ -317,10 +335,167 @@ export const PetForm: React.FC<PetFormProps> = ({
               label="Detailed description"
               required
               error={errors.longDescription?.message}
-              hint="Supports markdown shortcuts (## for headings, ** for bold)"
+              hint="Use the formatting toolbar or markdown shortcuts to style your pet's story."
             >
-              <div className="min-h-[160px] rounded-md border bg-transparent p-3 shadow-xs transition focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50">
-                <EditorContent editor={editor} />
+              <div className="overflow-hidden rounded-xl border bg-background shadow-xs transition focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50">
+                {editor && (
+                  <div className="flex flex-wrap items-center gap-1 border-b bg-muted/40 p-1.5 text-muted-foreground">
+                    <button
+                      type="button"
+                      onClick={() => editor.chain().focus().toggleBold().run()}
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("bold")
+                          ? "bg-primary/15 text-primary font-bold"
+                          : ""
+                      }`}
+                      title="Bold"
+                      aria-label="Bold"
+                    >
+                      <Bold className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => editor.chain().focus().toggleItalic().run()}
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("italic")
+                          ? "bg-primary/15 text-primary"
+                          : ""
+                      }`}
+                      title="Italic"
+                      aria-label="Italic"
+                    >
+                      <Italic className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => editor.chain().focus().toggleStrike().run()}
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("strike")
+                          ? "bg-primary/15 text-primary"
+                          : ""
+                      }`}
+                      title="Strikethrough"
+                      aria-label="Strikethrough"
+                    >
+                      <Strikethrough className="h-4 w-4" />
+                    </button>
+
+                    <div className="mx-1 h-4 w-px bg-border" />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHeading({ level: 2 })
+                          .run()
+                      }
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("heading", { level: 2 })
+                          ? "bg-primary/15 text-primary font-bold"
+                          : ""
+                      }`}
+                      title="Heading 2"
+                      aria-label="Heading 2"
+                    >
+                      <Heading2 className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHeading({ level: 3 })
+                          .run()
+                      }
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("heading", { level: 3 })
+                          ? "bg-primary/15 text-primary font-bold"
+                          : ""
+                      }`}
+                      title="Heading 3"
+                      aria-label="Heading 3"
+                    >
+                      <Heading3 className="h-4 w-4" />
+                    </button>
+
+                    <div className="mx-1 h-4 w-px bg-border" />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editor.chain().focus().toggleBulletList().run()
+                      }
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("bulletList")
+                          ? "bg-primary/15 text-primary"
+                          : ""
+                      }`}
+                      title="Bullet list"
+                      aria-label="Bullet list"
+                    >
+                      <List className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editor.chain().focus().toggleOrderedList().run()
+                      }
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("orderedList")
+                          ? "bg-primary/15 text-primary"
+                          : ""
+                      }`}
+                      title="Numbered list"
+                      aria-label="Numbered list"
+                    >
+                      <ListOrdered className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editor.chain().focus().toggleBlockquote().run()
+                      }
+                      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground ${
+                        editor.isActive("blockquote")
+                          ? "bg-primary/15 text-primary"
+                          : ""
+                      }`}
+                      title="Quote"
+                      aria-label="Quote"
+                    >
+                      <Quote className="h-4 w-4" />
+                    </button>
+
+                    <div className="mx-1 h-4 w-px bg-border" />
+
+                    <button
+                      type="button"
+                      onClick={() => editor.chain().focus().undo().run()}
+                      disabled={!editor.can().undo()}
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40"
+                      title="Undo"
+                      aria-label="Undo"
+                    >
+                      <Undo className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => editor.chain().focus().redo().run()}
+                      disabled={!editor.can().redo()}
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40"
+                      title="Redo"
+                      aria-label="Redo"
+                    >
+                      <Redo className="h-4 w-4" />
+                    </button>
+                  </div>
+                )}
+                <div className="min-h-[220px] cursor-text bg-background">
+                  <EditorContent editor={editor} />
+                </div>
               </div>
             </FormField>
 
