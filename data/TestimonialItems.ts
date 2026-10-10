@@ -23,7 +23,7 @@ export const TestimonialItems: TestimonialItem[] = [
     id: 3,
     starsCount: 4,
     quote:
-      "I was nervous at first, but I found the sweetest cat. The site helped me feel confident every step of the way.",
+      "I was nervous at first, but I found the sweetest cat. The team guided me and helped me feel confident every step of the way.",
     img: "/assets/testimonial/testimonial-03.jpg",
     adopterName: "Tariq Hasan",
     adopterDesignation: "University Lecturer",
