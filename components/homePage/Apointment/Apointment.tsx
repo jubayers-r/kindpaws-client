@@ -269,12 +269,14 @@ export const Apointment = () => {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className={`w-full justify-between items-center rounded-full px-5 py-3 h-auto bg-[#f9f5ef] text-sm text-gray-700 hover:text-gray-700 hover:bg-[#f9f5ef] ${
+                className={`w-full justify-start items-center gap-3 rounded-full pl-4 pr-5 py-3 h-auto bg-[#f9f5ef] text-sm text-gray-700 hover:text-gray-700 hover:bg-[#f9f5ef] border ${
                   errors.date ? "border-2 border-destructive" : "border-transparent"
                 }`}
               >
-                <span>{date ? date.toLocaleDateString() : "mm/dd/yyyy"}</span>
-                <CalendarIcon className="h-4 w-4 text-gray-500 shrink-0" />
+                <CalendarIcon className="h-4 w-4 text-primary shrink-0" />
+                <span className={date ? "text-gray-700" : "text-gray-400"}>
+                  {date ? date.toLocaleDateString() : "mm/dd/yyyy"}
+                </span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0 w-fit border-none" align="start">
@@ -310,11 +312,11 @@ export const Apointment = () => {
                 }
               }
             }}
-            className={`flex items-center bg-[#f9f5ef] rounded-full px-5 border cursor-pointer ${
+            className={`flex items-center bg-[#f9f5ef] rounded-full pl-4 pr-5 py-3 border cursor-pointer ${
               errors.time ? "border-2 border-destructive" : "border-transparent"
             }`}
           >
-            <Clock className="mr-2 h-4 w-4 text-gray-500 shrink-0" />
+            <Clock className="mr-3 h-4 w-4 text-primary shrink-0" />
             <input
               id="appt-time"
               type="time"
@@ -323,7 +325,7 @@ export const Apointment = () => {
                 setTime(e.target.value);
                 clearError("time");
               }}
-              className="bg-transparent w-full outline-none text-sm text-gray-700 py-2.5 cursor-pointer"
+              className="bg-transparent w-full outline-none text-sm text-gray-700 cursor-pointer [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
             />
           </label>
           {errors.time && <p className={errorClass}>{errors.time}</p>}
