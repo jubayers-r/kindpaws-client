@@ -1,3 +1,4 @@
+import { API_BASE } from "@/lib/api";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -7,7 +8,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   try {
-    const res = await fetch(`https://kind-paws.vercel.app/api/campaigns/${id}`, {
+    const res = await fetch(`${API_BASE}/api/campaigns/${id}`, {
       next: { revalidate: 60 },
     });
     if (res.ok) {
