@@ -32,7 +32,7 @@ export const SwiperComponent = () => {
   ];
 
   return (
-    <div className="-mt-10 relative h-[50vw] w-full">
+    <div className="-mt-10 relative min-h-[460px] sm:min-h-[520px] h-[75vh] max-h-[700px] lg:h-[50vw] xl:h-[650px] w-full">
       <Swiper
         direction="vertical"
         slidesPerView={1}
@@ -56,39 +56,39 @@ export const SwiperComponent = () => {
                 src={item.image}
                 fill
                 priority={index === 0}
-                className="object-cover w-full h-full brightness-85 my-10 sm:my-0"
+                className="object-cover w-full h-full brightness-75 sm:brightness-85"
                 alt={item.title}
               />
 
               {index === activeIndex && (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, x: -100 }}
+                  initial={{ opacity: 0, x: -60 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="absolute inset-0 items-center justify-start px-4 sm:px-8 xl:px-16 lg:flex hidden"
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="absolute inset-0 flex items-center justify-start px-4 sm:px-8 xl:px-16 pt-12 sm:pt-0"
                 >
-                  <div className="text-white w-full max-w-lg bg-black/40 backdrop-blur-sm rounded-xl p-4 sm:p-6 xl:p-8 space-y-6">
-                    <div className="space-y-4">
+                  <div className="text-white w-full max-w-lg bg-black/50 sm:bg-black/40 backdrop-blur-sm rounded-2xl p-5 sm:p-6 xl:p-8 space-y-4 sm:space-y-6">
+                    <div className="space-y-2 sm:space-y-4">
                       <h1 className="text-2xl sm:text-4xl xl:text-6xl font-extrabold leading-tight tracking-tight drop-shadow-md">
                         {item.title}
                       </h1>
-                      <p className="text-sm sm:text-base xl:text-lg font-medium text-gray-200 border-l-4 border-primary pl-4 leading-relaxed">
+                      <p className="text-xs sm:text-base xl:text-lg font-medium text-gray-200 border-l-4 border-primary pl-3 sm:pl-4 leading-relaxed line-clamp-3 sm:line-clamp-none">
                         {item.subtitle}
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-4 pt-2">
+                    <div className="flex flex-wrap gap-2.5 sm:gap-4 pt-1 sm:pt-2">
                       <Link
                         href="/contact-us"
-                        className="px-6 py-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold transition duration-300 text-sm sm:text-base"
+                        className="px-5 sm:px-6 py-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold transition duration-300 text-xs sm:text-base"
                       >
                         Know More
                       </Link>
 
                       <Link
                         href="/contact-us"
-                        className="px-6 py-2 rounded-full border border-white hover:bg-white hover:text-black text-white font-semibold transition duration-300 text-sm sm:text-base"
+                        className="px-5 sm:px-6 py-2 rounded-full border border-white hover:bg-white hover:text-black text-white font-semibold transition duration-300 text-xs sm:text-base"
                       >
                         Contact Us
                       </Link>
