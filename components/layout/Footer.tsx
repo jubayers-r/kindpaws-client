@@ -14,7 +14,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-secondary text-white">
-      <div className="w-[95%] mx-auto 2xl:w-9/11 py-16 grid gap-12 lg:grid-cols-3">
+      <div className="w-[95%] mx-auto 2xl:w-9/11 py-12 sm:py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {/* Left (Logo + Input) */}
         <FooterInput />
 

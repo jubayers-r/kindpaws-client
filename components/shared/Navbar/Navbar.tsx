@@ -92,14 +92,14 @@ function NavbarContent() {
 
         <div
           className={`w-[1px] h-6 rounded-full opacity-60 transition-colors duration-300 ${
-            user ? "xl:hidden" : ""
+            user ? "lg:hidden" : ""
           } ${scrolled ? "bg-black/30" : "bg-gray-300"}`}
         />
         {!user && (
           <Link href="/contact-us" className="group">
             <Button
               variant="outline"
-              className="hidden xl:inline-flex px-6 py-4 min-w-[170px] items-center justify-center gap-2 rounded-full border border-black/10 bg-white hover:bg-amber-500 text-black hover:text-white transition-all duration-300"
+              className="hidden lg:inline-flex px-6 py-4 min-w-[150px] xl:min-w-[170px] items-center justify-center gap-2 rounded-full border border-black/10 bg-white hover:bg-amber-500 text-black hover:text-white transition-all duration-300"
             >
               <span>Get In Touch</span>
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -108,7 +108,7 @@ function NavbarContent() {
         )}
 
         <div
-          className={`xl:hidden transition-colors duration-300 ${
+          className={`lg:hidden transition-colors duration-300 ${
             scrolled ? "text-black" : "text-white"
           }`}
         >
