@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
@@ -83,6 +83,11 @@ function DashboardLayoutContent({
   const router = useRouter();
   const pathname = usePathname();
   const { user, loading: authLoading, setStateData } = useAuth();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     setStateData(pathname);
@@ -96,6 +101,7 @@ function DashboardLayoutContent({
       variant="outline"
       className="w-full justify-start rounded-full"
       asChild
+      onClick={() => setOpen(false)}
     >
       <Link href="/">
         <Home className="h-4 w-4" />
@@ -109,7 +115,7 @@ function DashboardLayoutContent({
       <Button
         variant="ghost"
         size="icon"
-        className="sm:hidden"
+        className="md:hidden"
         aria-label="Open menu"
       >
         <Menu />
@@ -120,8 +126,8 @@ function DashboardLayoutContent({
   return (
     <div className="min-h-screen bg-background font-[family-name:var(--font-laila)]">
       <LoadingScreen isLoading={authLoading} />
-      <Sheet>
-        <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r bg-card sm:flex">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r bg-card md:flex">
           <div className="flex h-16 shrink-0 items-center border-b px-5">
             <LogoBlack />
           </div>
@@ -141,7 +147,7 @@ function DashboardLayoutContent({
           <div className="shrink-0 border-t p-3">{homeLink}</div>
         </aside>
 
-        <div className="sm:ml-64">
+        <div className="md:ml-64">
           <DashboardTopNavbar menuTrigger={menuTrigger} />
           <AuthRoleProvider>
             <Suspense fallback={<RouteFallback />}>
@@ -150,9 +156,12 @@ function DashboardLayoutContent({
           </AuthRoleProvider>
         </div>
 
-        <SheetContent side="left" className="w-64 gap-0 bg-card p-0">
+        <SheetContent side="left" className="w-64 gap-0 bg-card p-0 flex flex-col h-full">
           <SheetTitle className="sr-only">Dashboard menu</SheetTitle>
-          <nav className="flex-1 space-y-1 overflow-y-auto p-3">
+          <div className="flex h-16 shrink-0 items-center border-b px-5 pr-12">
+            <LogoBlack />
+          </div>
+          <nav className="flex-1 space-y-1 overflow-y-auto p-3" onClick={() => setOpen(false)}>
             <Suspense
               fallback={
                 <div className="space-y-2 p-1">
@@ -165,7 +174,7 @@ function DashboardLayoutContent({
               <DashboardNavItemsList />
             </Suspense>
           </nav>
-          <div className="border-t p-3">{homeLink}</div>
+          <div className="shrink-0 border-t p-3">{homeLink}</div>
         </SheetContent>
       </Sheet>
     </div>
