@@ -339,7 +339,7 @@ export const PetForm: React.FC<PetFormProps> = ({
             >
               <div className="overflow-hidden rounded-xl border bg-background shadow-xs transition focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50">
                 {editor && (
-                  <div className="flex flex-wrap items-center gap-1 border-b bg-muted/40 p-1.5 text-muted-foreground">
+                  <div className="flex items-center gap-1 overflow-x-auto scrollbar-none border-b bg-muted/40 p-1.5 text-muted-foreground sm:flex-wrap">
                     <button
                       type="button"
                       onClick={() => editor.chain().focus().toggleBold().run()}

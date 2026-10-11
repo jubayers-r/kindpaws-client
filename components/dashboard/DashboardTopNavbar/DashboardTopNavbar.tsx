@@ -88,7 +88,7 @@ export const DashboardTopNavbar: React.FC<DashboardTopNavbarProps> = ({
           </Badge>
         )}
 
-        <div className="flex items-center gap-2 rounded-full border bg-card py-1 pl-1 pr-3">
+        <div className="flex items-center gap-2 rounded-full border-0 sm:border bg-transparent sm:bg-card py-1 sm:pl-1 sm:pr-3">
           <Avatar className="h-8 w-8">
             <AvatarImage src={user?.photoURL || undefined} className="object-cover" />
             <AvatarFallback className="bg-primary text-sm font-semibold text-primary-foreground">

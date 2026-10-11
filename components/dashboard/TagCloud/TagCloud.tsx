@@ -58,14 +58,14 @@ export default function TagCloud() {
             </p>
           ) : (
             <ResponsiveContainer width="100%" height={300}>
-              <PieChart margin={{ top: 10, right: 35, bottom: 10, left: 35 }}>
+              <PieChart margin={{ top: 10, right: 15, bottom: 10, left: 15 }}>
                 <Pie
                   data={chartData}
                   dataKey="value"
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={72}
+                  outerRadius={60}
                   label={({ name, percent }: { name?: string; percent?: number }) =>
                     `${name || ""}: ${((percent || 0) * 100).toFixed(0)}%`
                   }

@@ -162,18 +162,18 @@ export default function ProfilePage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rotate-12 opacity-10 object-contain"
               />
-              <div className="relative flex items-center gap-4">
-                <Avatar className="h-20 w-20 border-2 border-white/30">
+              <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-white/30 shrink-0">
                   <AvatarImage src={user.photoURL || undefined} className="object-cover" />
                   <AvatarFallback className="bg-primary text-xl font-semibold text-primary-foreground">
                     {user.displayName?.[0] || "U"}
                   </AvatarFallback>
                 </Avatar>
-                <div className="min-w-0">
-                  <h2 className="truncate text-2xl font-bold text-white">
+                <div className="min-w-0 flex-1">
+                  <h2 className="truncate text-xl sm:text-2xl font-bold text-white">
                     {user.displayName || "No name set"}
                   </h2>
-                  <p className="truncate text-sm text-white/70">{user.email}</p>
+                  <p className="truncate text-xs sm:text-sm text-white/70">{user.email}</p>
                   <div className="mt-2">
                     <Badge variant={role === "admin" ? "default" : "secondary"}>
                       {loading ? "…" : role === "admin" ? "Administrator" : "Member"}
