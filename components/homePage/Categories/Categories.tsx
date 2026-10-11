@@ -125,7 +125,7 @@ export const Categories = () => {
   }, []);
 
   return (
-    <div className="text-secondary overflow-hidden">
+    <div className="text-secondary">
       <h3 className="font-bold sm:text-5xl text-3xl text-center sm:mt-20 mt-10 dark:text-secondary-foreground">
         Find Your Best Match
       </h3>
@@ -135,9 +135,12 @@ export const Categories = () => {
         )}
       </div>
 
-      <div ref={carouselRef} className="xl:hidden overflow-hidden cursor-grab active:cursor-grabbing my-14 sm:my-24 pt-6 pb-2">
+      <div
+        ref={carouselRef}
+        className="xl:hidden overflow-hidden cursor-grab active:cursor-grabbing my-14 sm:my-24 pt-6 pb-2 -mx-[2.5vw] sm:-mx-[2.5vw] px-[2.5vw] sm:px-[2.5vw]"
+      >
         <motion.div
-          className="flex gap-5 w-max pt-4 pb-2 px-1"
+          className="flex gap-5 w-max pt-4 pb-2"
           drag="x"
           dragConstraints={{ right: 0, left: -dragWidth }}
           whileTap={{ cursor: "grabbing" }}
