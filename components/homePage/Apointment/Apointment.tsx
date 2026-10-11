@@ -234,7 +234,7 @@ export const Apointment = () => {
 
         <motion.div variants={item}>
           <span className="block mb-2 text-sm font-medium">Pet Type</span>
-          <div className="flex gap-3" role="radiogroup" aria-label="Pet type">
+          <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3" role="radiogroup" aria-label="Pet type">
             {petOptions.map((pet) => {
               const active = petType === pet.value;
               const Icon = pet.icon;
@@ -248,13 +248,13 @@ export const Apointment = () => {
                     setPetType(pet.value);
                     clearError("petType");
                   }}
-                  className={`flex-1 flex items-center justify-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all ${
+                  className={`flex-1 min-w-[75px] flex items-center justify-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all ${
                     active
                       ? "bg-primary/10 text-primary ring-2 ring-primary"
                       : "bg-[#f9f5ef] text-gray-600 hover:bg-primary/10"
                   }`}
                 >
-                  <Icon className="w-4 h-4" aria-hidden="true" />
+                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
                   {pet.value}
                 </button>
               );

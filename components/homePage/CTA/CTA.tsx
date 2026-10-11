@@ -48,29 +48,29 @@ export const CTA = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
+          initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="lg:-translate-x-50 sm:-translate-x-20 place-items-center text-center sm:place-items-start sm:text-left py-10 sm:py-0"
+          className="flex flex-col items-center text-center sm:items-start sm:text-left py-8 sm:py-12 px-6 sm:px-8 z-10"
         >
-          <div className="space-y-5 max-w-lg">
-            <p className="font-light lg:text-5xl text-3xl text-primary">
+          <div className="space-y-4 max-w-lg">
+            <p className="font-light text-2xl sm:text-3xl lg:text-4xl text-primary">
               Give a Paw🐾
             </p>
             <h2 className="text-2xl/tight sm:text-3xl/tight lg:text-5xl/tight font-semibold text-secondary mb-4 xl:uppercase">
               Some pet to life in need
             </h2>
-            <p className="text-muted-foreground mb-6 text-lg sm:hidden 2xl:block">
+            <p className="text-muted-foreground mb-6 text-base sm:text-lg">
               Every adoption saves a life and brings joy to another. Join our
               mission to unite pets with their forever homes and make a real
               impact — one paw at a time.
             </p>
           </div>
-          <Link href="/adopt" className="group inline-block">
+          <Link href="/adopt" className="group inline-block w-full sm:w-auto">
             <Button
               size="xl"
-              className="h-auto gap-3 rounded-full bg-primary px-7 py-6 text-base font-semibold text-white shadow-md shadow-primary/30 transition-all duration-300 hover:-translate-y-1 hover:bg-secondary hover:shadow-lg hover:shadow-secondary/40 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:text-xl [&_svg]:size-5 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:-translate-y-0.5 group-hover:[&_svg]:translate-x-0.5"
+              className="w-full sm:w-auto h-auto gap-3 rounded-full bg-primary px-6 sm:px-7 py-4 sm:py-6 text-sm sm:text-base font-semibold text-white shadow-md shadow-primary/30 transition-all duration-300 hover:-translate-y-1 hover:bg-secondary hover:shadow-lg hover:shadow-secondary/40 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:text-xl [&_svg]:size-5 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:-translate-y-0.5 group-hover:[&_svg]:translate-x-0.5"
             >
               Find Your New Best Friend
               <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
