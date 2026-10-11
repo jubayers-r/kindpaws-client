@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useRef } from "react";
 import { motion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -107,6 +108,22 @@ export const Categories = () => {
     );
   };
 
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [dragWidth, setDragWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    const updateWidth = () => {
+      if (carouselRef.current) {
+        const scrollWidth = carouselRef.current.scrollWidth;
+        const offsetWidth = carouselRef.current.offsetWidth;
+        setDragWidth(scrollWidth - offsetWidth);
+      }
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
   return (
     <div className="text-secondary overflow-hidden">
       <h3 className="font-bold sm:text-5xl text-3xl text-center sm:mt-20 mt-10 dark:text-secondary-foreground">
@@ -118,16 +135,18 @@ export const Categories = () => {
         )}
       </div>
 
-      <motion.div
-        className="flex xl:hidden gap-5 cursor-grab active:cursor-grabbing my-20 sm:my-30"
-        drag="x"
-        dragConstraints={{ left: -400, right: 0 }}
-        whileTap={{ cursor: "grabbing" }}
-      >
-        {petCategories.map((item, i) =>
-          circle(i, "", item.color, item.img, item.category)
-        )}
-      </motion.div>
+      <div ref={carouselRef} className="xl:hidden overflow-hidden cursor-grab active:cursor-grabbing my-14 sm:my-24 pt-6 pb-2">
+        <motion.div
+          className="flex gap-5 w-max pt-4 pb-2 px-1"
+          drag="x"
+          dragConstraints={{ right: 0, left: -dragWidth }}
+          whileTap={{ cursor: "grabbing" }}
+        >
+          {petCategories.map((item, i) =>
+            circle(i, "", item.color, item.img, item.category)
+          )}
+        </motion.div>
+      </div>
     </div>
   );
 };
