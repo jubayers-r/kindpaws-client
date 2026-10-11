@@ -21,7 +21,7 @@ import LoadingScreen from "@/components/shared/LoadingScreen/LoadingScreen";
 const ITEMS_PER_PAGE = 6;
 
 const CONTROL_CLASS =
-  "flex w-full items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-base shadow-sm hover:bg-gray-50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none data-[state=open]:bg-gray-50 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:data-[state=open]:bg-neutral-800";
+  "flex w-full items-center justify-between gap-1.5 sm:gap-2 rounded-xl bg-white px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base shadow-sm hover:bg-gray-50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none data-[state=open]:bg-gray-50 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:data-[state=open]:bg-neutral-800";
 const CONTENT_CLASS =
   "min-w-[var(--radix-dropdown-menu-trigger-width)] rounded-xl border-gray-200 p-1 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-white";
 const ITEM_CLASS =
@@ -173,7 +173,7 @@ function AdoptContent() {
         Adopt a New Family Member
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10 max-w-3xl mx-auto">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-8 sm:mb-10 max-w-3xl mx-auto">
         <FilterDropdown
           label="Filter by category"
           value={selectedCategory}
