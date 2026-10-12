@@ -1,15 +1,15 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
 import { Logo, LogoBlack } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { AvatarDropdown } from "./AvatarDropdown";
 import MobileMenu from "./MobileMenu";
 import NavLinks from "./NavLinks";
-import Link from "next/link";
-import { useAuth } from "@/hooks/useAuth";
-import { AvatarDropdown } from "./AvatarDropdown";
-import { useEffect, useState, Suspense } from "react";
-import { usePathname } from "next/navigation";
 
 function NavbarContent() {
   const [scrolled, setScrolled] = useState(false);
