@@ -76,23 +76,23 @@ export const SwiperComponent = () => {
                       initial={{ opacity: 0, x: -60 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.8, ease: "easeOut" }}
-                      className="pointer-events-auto text-white w-full max-w-lg bg-black/50 sm:bg-black/40 backdrop-blur-sm rounded-2xl p-4 sm:p-6 xl:p-8 space-y-4 sm:space-y-6"
+                      className="pointer-events-auto text-white w-full max-w-lg bg-black/50 sm:bg-black/40 backdrop-blur-sm rounded-2xl p-4 sm:p-6 xl:p-8 space-y-4 sm:space-y-6 text-center sm:text-left"
                     >
                       <div className="space-y-2 sm:space-y-4">
                         <h1 className="text-2xl sm:text-4xl xl:text-6xl font-extrabold leading-tight tracking-tight drop-shadow-md">
                           {item.title}
                         </h1>
-                        <p className="text-xs sm:text-base xl:text-lg font-medium text-gray-200 border-l-4 border-primary pl-3 sm:pl-4 leading-relaxed line-clamp-3 sm:line-clamp-none">
+                        <p className="text-xs sm:text-base xl:text-lg font-medium text-gray-200 border-l-0 sm:border-l-4 border-primary pl-0 sm:pl-4 leading-relaxed line-clamp-3 sm:line-clamp-none">
                           {item.subtitle}
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-2.5 sm:gap-4 pt-1 sm:pt-2">
+                      <div className="flex flex-wrap justify-center sm:justify-start gap-2.5 sm:gap-4 pt-1 sm:pt-2">
                         <Link
-                          href="/contact-us"
+                          href="/adopt"
                           className="px-5 sm:px-6 py-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold transition duration-300 text-xs sm:text-base"
                         >
-                          Know More
+                          Explore Paws
                         </Link>
 
                         <Link
