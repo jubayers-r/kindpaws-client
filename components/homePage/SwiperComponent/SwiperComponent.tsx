@@ -32,11 +32,17 @@ export const SwiperComponent = () => {
   ];
 
   return (
-    <div className="-mt-10 relative min-h-[460px] sm:min-h-[520px] h-[75vh] max-h-[700px] lg:max-h-none lg:h-[50vw] w-full">
+    <div className="-mt-10 relative min-h-[420px] sm:min-h-[500px] h-[65vh] sm:h-[75vh] max-h-[700px] lg:max-h-none lg:h-[50vw] w-full overflow-hidden">
       <Swiper
-        direction="vertical"
+        direction="horizontal"
+        breakpoints={{
+          1024: {
+            direction: "vertical",
+          },
+        }}
         slidesPerView={1}
         spaceBetween={20}
+        touchReleaseOnEdges={true}
         pagination={{ clickable: true }}
         modules={[Pagination, Autoplay]}
         loop={true}
