@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
-import Image from "next/image";
-import { Accordion } from "@/components/ui/accordion";
 import { AccordionItemComponent } from "@/components/shared/AccordionItemComponent";
+import { Accordion } from "@/components/ui/accordion";
 import { FaqItems } from "@/data/FaqItems";
 import { PawPrint } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 
 export const FAQ = () => {
   return (
@@ -29,8 +29,8 @@ export const FAQ = () => {
         <Image
           src="/assets/FAQ/paw-bg-pattern-white.png"
           alt="bg-paw"
-          width={300}
-          height={300}
+          width={420}
+          height={420}
           className="absolute -top-0 -z-1 h-auto"
         />
       </motion.div>
