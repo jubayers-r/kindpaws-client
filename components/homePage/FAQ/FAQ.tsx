@@ -33,20 +33,6 @@ export const FAQ = () => {
           height={300}
           className="absolute -top-0 -z-1 h-auto"
         />
-        <motion.img
-          src="/assets/cta/bone-img.png"
-          alt="bone"
-          className="absolute w-15 sm:w-20 top-10 sm:top-50 sm:right-10 right-5"
-          animate={{
-            rotate: [-15, 20, -15],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
       </motion.div>
 
       <div>
