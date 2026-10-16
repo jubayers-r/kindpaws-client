@@ -86,7 +86,7 @@ KindPaws was architected to demonstrate how high-performance modern web standard
 ## 📁 Repository Structure
 
 ```text
-kindpaws-client-ts/
+kindpaws-client/
 ├── app/                        # Next.js App Router route segments
 │   ├── (auth)/                 # Isolated authentication routes (Login / Register)
 │   ├── (main)/                 # Public customer-facing pages (Adopt, Campaigns, Contact)
@@ -132,8 +132,8 @@ kindpaws-client-ts/
 ### 1. Clone Repository & Install
 
 ```bash
-git clone https://github.com/jubayers-r/kindpaws-client-ts.git
-cd kindpaws-client-ts
+git clone https://github.com/jubayers-r/kindpaws-client.git
+cd kindpaws-client
 bun install
 ```
 
