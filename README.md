@@ -1,74 +1,84 @@
-# 🐾 KindPaws – Pet Adoption & Donation Platform
+# 🐾 KindPaws – Enterprise-Grade Pet Adoption & Crowdfunding Platform
 
-A high-performance, modern **Next.js 16 (App Router) + TypeScript** client application where users can discover, adopt, or launch fundraising donation campaigns for pets in need. Engineered natively for Next.js with Bun, Turbopack, Tailwind CSS v4, and shadcn/ui.
+[![Live Platform](https://img.shields.io/badge/Live_Demo-kindpaws.byjubayer.com-FF642F?style=for-the-badge&logo=vercel&logoColor=white)](https://kindpaws.byjubayer.com/)
+[![Next.js](https://img.shields.io/badge/Next.js_16-App_Router-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_5-Strict_Type_Safe-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Bun](https://img.shields.io/badge/Bun_Runtime-High_Performance-FBF0DF?style=for-the-badge&logo=bun&logoColor=black)](https://bun.sh/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-Engineered-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-## 🌐 Live Platform
+An enterprise-ready, mission-driven **Next.js 16 (App Router) + TypeScript** platform connecting prospective pet parents with rescue animals, featuring real-time adoption workflows, role-based governance, and Stripe-powered crowdfunding campaigns.
 
-🔗 [Visit KindPaws](https://kind-paws.web.app/)
-
----
-
-## 🎯 Platform Overview
-
-KindPaws bridges compassionate people with pets waiting for a home and provides transparent fundraising campaigns for medical care, rescue operations, and animal welfare:
-
-- **Pet Discovery & Adoption**: Search, filter, and apply for adoption across various pet categories.
-- **Fundraising & Campaigns**: Create and support donation campaigns with real-time goal progress.
-- **Secure Stripe Donations**: Direct card payment processing and transparent donation tracking.
-- **Role-Based Dynamic Dashboard**: Tailored management portals for regular users and administrators.
-- **Modern Streaming Architecture**: Native App Router loading, error, and not-found boundaries with instant navigation.
+> **Production Deployment:** [https://kindpaws.byjubayer.com/](https://kindpaws.byjubayer.com/)
 
 ---
 
-## ✨ Features & Capabilities
+## Executive Summary (For Technical Leadership)
 
-### 🔐 Authentication & Access Control
-- **Firebase Auth v13**: Email/password registration and Google/GitHub OAuth integrations.
-- **JWT Authorization**: Automatic token synchronization with backend REST API using configured Axios interceptors.
-- **Role-Based Guards**: Protected routes distinguishing regular users and platform administrators.
-- **Instant Navigation**: Dashboard layout retains client state and renders continuously without blocking segment validation.
+KindPaws was architected to demonstrate how high-performance modern web standards solve real-world operational challenges in animal welfare:
 
-### 🏠 Public User Experience
-- **Interactive Homepage**: Dynamic hero carousel, featured categories, reservation booking appointment form, FAQ accordion, testimonials, and brand showcase.
-- **Pet Listing (`/adopt`)**: Search by keywords and filter by animal category with responsive grid layouts.
-- **Pet Details (`/pet/details/[id]`)**: Full pet profile, temperament, medical details, and interactive adoption request modal.
-- **Campaigns (`/campaigns`)**: Donation campaigns discovery with visual progress meters and funding targets.
-- **Campaign Details (`/campaign/details/[id]`)**: Rich storytelling via TipTap WYSIWYG, campaign milestones, donor recommendations, and Stripe payment modal.
-- **Contact Us (`/contact-us`)**: Integrated contact form and community inquiry cards.
-
-### 🧑 User Dashboard (`/dashboard/*`)
-- **Dashboard Overview**: Key metrics, donation history overview, and rapid shortcuts.
-- **My Added Pets**: Comprehensive listing of user's submitted pets with quick edit and adoption status toggles.
-- **Add / Edit Pet (`/dashboard/add-pet`, `/dashboard/update-pet/[id]`)**: Comprehensive pet registration form with ImgBB direct image upload integration.
-- **Adoption Requests (`/dashboard/adoption-requests`)**: Real-time review and processing of incoming adoption requests.
-- **My Campaigns (`/dashboard/my-campaigns`)**: Fundraising management, pause/unpause campaigns, edit goals, and view donor tables.
-- **My Donations (`/dashboard/my-donations`)**: Track all contributions with invoice references and refund request options.
-- **User Profile (`/dashboard/profile`)**: Manage personal details and profile avatar.
-
-### 🛠️ Admin Dashboard
-- **Admin Overview**: Platform-wide metrics, pet category breakdown pie charts (Recharts), and system logs.
-- **All Pets (`/dashboard/all-pets`)**: Global directory of all pets with administrative deletion and status override capabilities.
-- **All Campaigns (`/dashboard/all-donations`)**: Platform-wide overview of all campaigns and donation transactions.
-- **Users Management (`/dashboard/users`)**: Directory of registered accounts with privilege management (promote to admin / demote to user).
+- **Business Value**: Consolidates pet listings, adoption vetting, and financial donations under a unified, accessible, conversion-optimized experience.
+- **Modern Performance Stack**: Engineered with Next.js 16 (App Router with Turbopack & Partial Prerendering) paired with the Bun runtime, delivering fast cold-starts, instant client transitions, and optimized Core Web Vitals (LCP/CLS/INP).
+- **Security & Multi-Tenancy**: Built with strict role-based access control (RBAC), tokenized JWT synchronization via Axios interceptors, server-side route guards, and zero secret leakage to the client bundle.
+- **Enterprise UI/UX**: Crafted with Tailwind CSS v4 tokens, accessible Radix UI / shadcn primitives, Framer Motion micro-interactions, responsive chart visualizations (Recharts), and rich text storytelling (TipTap).
 
 ---
 
-## ⚙️ Architecture & Tech Stack
+## 🎯 Core Capabilities & User Journeys
 
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Runtime & Package Manager** | **Bun (`bun@1.3.9`)** | Fast package management, scripts, and runtime |
-| **Framework** | **Next.js 16.4.0 (App Router)** | Turbopack compilation, Cache Components, Partial Prefetching |
-| **Language** | **TypeScript 5** | Strict type safety across UI, context, and data layers |
-| **UI & Styling** | **Tailwind CSS v4** | Utility-first styles with `@tailwindcss/turbopack` and CSS theme tokens |
-| **Component System** | **shadcn/ui & Radix UI** | Accessible, headless UI primitives and components |
-| **Server State & Caching** | **TanStack Query v5** | Remote data caching, deduplication, and optimistic updates |
-| **Authentication** | **Firebase Auth v13** | Client authentication SDK and OAuth provider orchestration |
-| **Payment Gateway** | **Stripe SDK** | Embedded payment element and client processing |
-| **Rich Text Editor** | **TipTap (`@tiptap/react`)** | Clean rich-text authoring for campaign descriptions |
-| **Animations** | **Motion (`motion/react`)** | Smooth route transitions, modal appearances, and micro-interactions |
-| **Notifications** | **Sonner** | Clean toast notifications for feedback and alerts |
-| **Data Visualization** | **Recharts** | Responsive SVG charts for administrative dashboard analytics |
+```
+                    ┌──────────────────────────────────────────────┐
+                    │            KindPaws Unified Platform         │
+                    └──────────────────────┬───────────────────────┘
+                                           │
+             ┌─────────────────────────────┴─────────────────────────────┐
+             ▼                                                           ▼
+┌─────────────────────────┐                                 ┌─────────────────────────┐
+│     Adopter & Donor     │                                 │     Platform Admin      │
+├─────────────────────────┤                                 ├─────────────────────────┤
+│ • Advanced Multi-filter │                                 │ • System-Wide Metrics   │
+│ • Full Pet Dossiers     │                                 │ • Adoption Lifecycle    │
+│ • 1-Click Applications  │                                 │ • Campaign Moderation   │
+│ • Secure Stripe Donates │                                 │ • User RBAC Promotion   │
+│ • TipTap Rich Stories   │                                 │ • Real-Time Analytics   │
+└─────────────────────────┘                                 └─────────────────────────┘
+```
+
+### 1. Public Marketplace & Adoption
+
+- **Real-Time Catalog Search & Filter (`/adopt`)**: Instant category and keyword filtering with optimistic state synchronization.
+- **Comprehensive Pet Dossiers (`/pet/details/[id]`)**: Detailed health status, temperament, history, owner credentials, and interactive adoption request modals.
+- **Transparent Crowdfunding (`/campaigns`)**: Goal-driven fundraising campaigns with visual funding meters, recent donor feeds, and Stripe card processing.
+- **Rich Storytelling Editor (`/campaign/details/[id]`)**: TipTap WYSIWYG editor integration for campaigners to document rescue updates with formatted media and progress milestones.
+
+### 2. User Workspace (`/dashboard/*`)
+
+- **Actionable Overview**: Instant snapshot of active adoption requests, submitted pets, and financial contribution summaries.
+- **Adoption Request Tracker**: Complete review pipeline for incoming inquiries on user-listed pets with one-click status transitions (`Pending` / `Approved` / `Rejected`).
+- **Pet Registration Pipeline**: Dynamic multipart form with real-time Zod schema validation and ImgBB cloud storage integration.
+- **Personal Donation Ledger**: Transparent history of financial donations with receipt/invoice references.
+
+### 3. Administrative Control Center
+
+- **Executive Analytics Overview**: Platform-wide metrics, distribution charts (Recharts), and health diagnostics.
+- **Inventory & Campaign Moderation**: Comprehensive control across all platform pets and fundraising campaigns with administrative overrides and deletion rights.
+- **Identity & RBAC Management**: Complete user directory with instant role promotions (`user` ⇄ `admin`).
+
+---
+
+## ⚙️ Architectural Decisions & Tech Stack
+
+| Domain                   | Technology                      | Engineering Rationale                                                                      |
+| :----------------------- | :------------------------------ | :----------------------------------------------------------------------------------------- |
+| **Runtime & Toolchain**  | **Bun (`v1.3.9+`)**             | Ultra-fast dependency resolution, package scripting, and native TypeScript execution.      |
+| **Framework**            | **Next.js 16.4.0 (App Router)** | Turbopack compilation, Partial Prerendering (PPR), streaming SSR, and layout persistence.  |
+| **Language**             | **TypeScript 5 (Strict)**       | Strict compile-time safety across UI schemas, API contracts, and context states.           |
+| **Styling Architecture** | **Tailwind CSS v4**             | Next-generation CSS theme engine with `@tailwindcss/turbopack` and zero runtime CSS bloat. |
+| **Component Primitives** | **shadcn/ui & Radix UI**        | WAI-ARIA compliant, headless, accessible foundational design system.                       |
+| **Server State & Cache** | **TanStack Query v5**           | Declarative remote data caching, stale-while-revalidate, and deduplicated network calls.   |
+| **Identity & OAuth**     | **Firebase Auth v13**           | Multi-provider authentication (Google, GitHub, Email) with client-side token refresh.      |
+| **Payment Gateway**      | **Stripe SDK**                  | PCI-compliant card payments with embedded Elements and client-side confirmation.           |
+| **Form Engineering**     | **React Hook Form + Zod**       | Controlled rendering footprint with type-inferred runtime schema validation.               |
+| **Rich Text Engine**     | **TipTap (`@tiptap/react`)**    | Headless extensible text editor producing sanitized, responsive HTML output.               |
 
 ---
 
@@ -77,35 +87,58 @@ KindPaws bridges compassionate people with pets waiting for a home and provides 
 ```text
 kindpaws-client-ts/
 ├── app/                        # Next.js App Router route segments
-│   ├── (auth)/                 # Login and registration routes
-│   ├── (main)/                 # Public user-facing pages (adopt, campaigns, etc.)
-│   ├── dashboard/              # Protected user and admin dashboard routes
-│   ├── error.tsx               # Root error boundary
-│   ├── loading.tsx             # Root streaming loading boundary
-│   └── not-found.tsx           # Global 404 page
-├── components/                 # React component library
-│   ├── ui/                     # Atomic shadcn/ui components (Button, Dialog, Table, etc.)
-│   ├── shared/                 # Cross-route components (Navbar, Footer, Logo, PetForm, etc.)
-│   ├── layout/                 # MainShell and layout orchestrators
-│   ├── dashboard/              # Dashboard shells, tables, and metric cards
-│   ├── homePage/               # Home-specific sections (Hero, Swiper, FAQ, etc.)
-│   ├── petListing/             # Pet catalog filters and card grids
-│   └── campaignPage/           # Campaign presentation and donation modal
-├── context/                    # React Context providers (AuthProvider, AuthRoleProvider)
-├── hooks/                      # Custom hooks (useAuth, useUserRole, useAxiosSecure, etc.)
-├── lib/                        # Configuration & utilities (api.ts, axiosSecure.ts, utils.ts)
-├── types/                      # Authoritative TypeScript types (Pet, Campaign, User, etc.)
-├── public/                     # Static brand assets, categories, and hero slides
-├── docs/                       # Engineering standards (frontend, testing, security)
-├── ARCHITECTURE.md             # Ground-truth architectural documentation
-└── AGENTS.md                   # AI agent runtime protocol and operating rules
+│   ├── (auth)/                 # Isolated authentication routes (Login / Register)
+│   ├── (main)/                 # Public customer-facing pages (Adopt, Campaigns, Contact)
+│   ├── dashboard/              # Role-protected User & Admin portals
+│   ├── layout.tsx              # Root HTML shell & provider wrappers
+│   ├── error.tsx               # Root exception boundary
+│   ├── loading.tsx             # Root streaming suspense skeleton
+│   └── not-found.tsx           # Global 404 handler
+├── components/                 # Component Architecture
+│   ├── ui/                     # Atomic shadcn/ui primitives (Button, Dialog, Table, Sheet)
+│   ├── shared/                 # Cross-cutting components (Navbar, Footer, Logo, PetForm)
+│   ├── layout/                 # MainShell, responsive header, and navigation switchers
+│   ├── dashboard/              # Analytics charts, data tables, and modal dialogs
+│   ├── homePage/               # Landing page modules (Hero Swiper, Categories, CTA, FAQ)
+│   └── campaignPage/           # Campaign displays and Stripe payment modal
+├── context/                    # Shared context providers (AuthProvider, AuthRoleProvider)
+├── hooks/                      # Custom hooks (useAuth, useUserRole, useAxiosSecure)
+├── lib/                        # Infrastructure, Axios interceptors, and utility functions
+├── types/                      # Ground-truth TypeScript contracts & models
+├── docs/                       # Internal engineering documentation (frontend, security, tests)
+├── ARCHITECTURE.md             # Ground-truth architecture blueprint
+└── AGENTS.md                   # AI agent governance protocol
 ```
 
 ---
 
-## 🔒 Environment Configuration
+## 🔒 Security & Code Standards
 
-Create a `.env.local` file in the root directory:
+- **Server-Side Authorization**: Hiding UI elements is never treated as security. Sensitive routes and administrative actions validate JWT tokens and authorization roles against backend APIs on every call.
+- **Zero Secret Exposure**: Public bundles only ingest `NEXT_PUBLIC_` runtime variables; API secret keys and privileged tokens remain strictly server-isolated.
+- **Sanitized Inputs & Outputs**: All rich-text content rendered via TipTap is defensively parsed and sanitized to protect against cross-site scripting (XSS).
+- **Resilient Layout Boundaries**: Next.js 16 loading and error boundaries isolate failure domains, ensuring uninterrupted navigation across dashboard segments.
+
+---
+
+## 🚀 Local Development & Setup
+
+### Prerequisites
+
+- **Bun** (recommended: `v1.3+`)
+- Node.js `v20+` (optional runtime fallback)
+
+### 1. Clone Repository & Install
+
+```bash
+git clone https://github.com/jubayers-r/kindpaws-client-ts.git
+cd kindpaws-client-ts
+bun install
+```
+
+### 2. Environment Variables
+
+Create `.env.local` in the project root:
 
 ```env
 # Firebase Authentication
@@ -116,37 +149,29 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 
-# Third-Party Services
+# Third-Party Integrations
 NEXT_PUBLIC_IMGBB_API_KEY=your-imgbb-api-key
 NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your-stripe-public-key
 
-# Backend API Configuration
+# Backend API Endpoint
 NEXT_PUBLIC_API_URL=https://kind-paws.vercel.app
 ```
 
----
+### 3. Launch Development Server
 
-## 🚀 Getting Started
-
-This repository strictly enforces **Bun** as its package manager and runtime.
-
-### 1. Install Dependencies
-```bash
-bun install
-```
-
-### 2. Run Development Server
 ```bash
 bun dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 3. Verification & Checks
+Navigate to [http://localhost:5173](http://localhost:5173) in your browser.
+
+### 4. Verification Suite
+
 ```bash
-# Typecheck
+# Static type checking
 bun x tsc --noEmit
 
-# Lint check
+# Linting
 bun run lint
 
 # Production build
@@ -157,31 +182,26 @@ bun run build
 
 ## 🛂 Demo Credentials
 
-| Role | Email | Password |
-| :--- | :--- | :--- |
-| **Administrator** | `admin@gmail.com` | `123456` |
-| **Regular User** | `user@gmail.com` | `123456` |
+| Access Level               | Email             | Password | Primary Capabilities                                           |
+| :------------------------- | :---------------- | :------- | :------------------------------------------------------------- |
+| **Platform Administrator** | `admin@gmail.com` | `123456` | Full platform metrics, moderation, user promotion/demotion     |
+| **Standard User**          | `user@gmail.com`  | `123456` | Pet creation, adoption request tracking, fundraising campaigns |
 
 ---
 
-## 📜 Engineering Standards & Guidelines
+## 👨‍💻 Engineer & Architect
 
-For architectural principles and engineering protocols, refer to:
-- [`ARCHITECTURE.md`](ARCHITECTURE.md): Application architecture, state management, and boundaries.
-- [`AGENTS.md`](AGENTS.md): AI agent governance protocol and runtime invariants.
-- [`docs/engineering/frontend.md`](docs/engineering/frontend.md): UI, forms, accessibility, and styling standards.
-- [`docs/engineering/testing.md`](docs/engineering/testing.md): Verification orders and regression testing checklists.
-- [`docs/engineering/security.md`](docs/engineering/security.md): Secrets protection and authorization invariants.
+**Jubayer Shikder**
+_Full-Stack Software Engineer & Next.js Specialist_
+Building high-reliability, responsive, and performance-first web applications.
 
----
-
-## 👨‍💻 Author
-
-**Md. Jubayer Shikder** — Full-Stack Developer  
-[🐦 Twitter (X)](https://x.com/jubayers_r) • [📧 Email](mailto:jubayer.shikder.007@gmail.com) • [💼 LinkedIn](https://linkedin.com/in/jubayer-shikder) • [💻 GitHub](https://github.com/jubayers-r)
+- 💼 **LinkedIn**: [linkedin.com/in/jubayer-shikder](https://linkedin.com/in/jubayer-shikder)
+- 💻 **GitHub**: [github.com/jubayers-r](https://github.com/jubayers-r)
+- 🐦 **Twitter (X)**: [@jubayers_r](https://x.com/jubayers_r)
+- 📧 **Email**: [jubayer.shikder.007@gmail.com](mailto:jubayer.shikder.007@gmail.com)
 
 ---
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE) — free to use, modify, and distribute.
+This software is released under the [MIT License](LICENSE).
