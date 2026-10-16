@@ -21,16 +21,20 @@ export const FAQ = () => {
           <Image
             src="/assets/FAQ/about-img-04.png"
             alt="dog"
-            width={500}
-            height={500}
+            width={712}
+            height={599}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={90}
             className="w-full h-auto object-contain"
           />
         </div>
         <Image
           src="/assets/FAQ/paw-bg-pattern-white.png"
           alt="bg-paw"
-          width={420}
-          height={420}
+          width={403}
+          height={402}
+          sizes="(max-width: 1024px) 300px, 400px"
+          quality={90}
           className="absolute -top-0 -z-1 h-auto"
         />
       </motion.div>

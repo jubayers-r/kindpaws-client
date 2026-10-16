@@ -62,6 +62,8 @@ export const SwiperComponent = () => {
                 src={item.image}
                 fill
                 priority={index === 0}
+                sizes="100vw"
+                quality={90}
                 className="object-cover w-full h-full brightness-75 sm:brightness-85"
                 alt={item.title}
               />

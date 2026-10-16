@@ -96,7 +96,7 @@ export const Categories = () => {
               alt={category}
               variants={circleVariants}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="scale-[1.1] z-10 object-contain -translate-y-3 sm:-translate-y-5 pointer-events-none"
+              className="scale-[1.1] z-10 object-contain -translate-y-3 sm:-translate-y-5 pointer-events-none transform-gpu backface-hidden"
             />
           </div>
           <p className="mt-3 font-bold">

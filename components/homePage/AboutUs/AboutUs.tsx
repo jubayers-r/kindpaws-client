@@ -72,8 +72,10 @@ export const AboutUs = () => {
             <Image
               src="/assets/about-img-dog.png"
               alt="Golden Retriever"
-              width={320}
-              height={320}
+              width={516}
+              height={647}
+              sizes="(max-width: 640px) 100vw, 320px"
+              quality={90}
               className="w-full max-w-xs mx-auto h-auto object-contain"
             />
           </div>

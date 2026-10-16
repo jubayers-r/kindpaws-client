@@ -20,15 +20,19 @@ export const CTA = () => {
           <Image
             src="/assets/cta/bg-img.png"
             alt="dog"
-            width={700}
-            height={500}
+            width={1026}
+            height={614}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={90}
             className="w-full h-auto object-contain"
           />
           <Image
             src="/assets/cta/paw-bg-pattern.png"
             alt="bg-paw"
-            width={300}
-            height={300}
+            width={369}
+            height={368}
+            sizes="300px"
+            quality={90}
             className="absolute top-20 h-auto"
           />
           <motion.img

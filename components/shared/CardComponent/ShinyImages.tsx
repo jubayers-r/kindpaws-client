@@ -30,6 +30,8 @@ export const ShinyImage: React.FC<ShinyImageProps> = ({
         alt={alt}
         width={400}
         height={208}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        quality={85}
         unoptimized={!src.startsWith("/") && !src.includes("i.ibb.co") && !src.includes("firebasestorage.app")}
         className="w-full h-52 object-cover rounded-[1.8rem]"
       />
