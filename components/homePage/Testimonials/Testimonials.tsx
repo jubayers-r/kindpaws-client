@@ -35,8 +35,8 @@ export const Testimonials = () => {
   });
 
   return (
-    <section className="relative py-20">
-      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-full -z-10 overflow-hidden">
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
         <Image
           src="/assets/testimonial/testimonial-bg.jpg"
           alt="Testimonial background"

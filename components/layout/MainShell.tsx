@@ -42,7 +42,7 @@ export const MainShell: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div>
+    <div className="w-full overflow-x-hidden">
       <Suspense fallback={null}>
         <PageTransitionLoader />
       </Suspense>

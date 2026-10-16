@@ -34,12 +34,12 @@ function NavbarContent() {
 
   return (
     <div
-      className={`navbar px-5 transition-[backdrop-filter,background-color,border-radius] duration-300 mt-2 2xl:w-9/11 w-[95%] mx-auto sm:my-7 fixed left-0 right-0 z-50 py-2 sm:py-5 grid grid-cols-[1fr_auto_1fr] items-center ${
+      className={`navbar px-3 sm:px-5 transition-[backdrop-filter,background-color,border-radius] duration-300 mt-2 2xl:w-9/11 w-[95%] max-w-full mx-auto sm:my-7 fixed left-0 right-0 z-50 py-2 sm:py-5 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] ${
         scrolled ? "rounded-full backdrop-blur-md bg-white/70" : ""
       }`}
     >
       {/* logo / logoBlack on scroll */}
-      <div className="relative justify-self-start col-start-1 row-start-1">
+      <div className="relative justify-self-start shrink-0 col-start-1 row-start-1">
         <div
           className={`transition-opacity duration-300 ${
             scrolled ? "opacity-0" : "opacity-100"
@@ -68,7 +68,7 @@ function NavbarContent() {
       </div>
 
       {/* navend */}
-      <div className="flex items-center gap-4 justify-self-end col-start-3 row-start-1">
+      <div className="flex items-center gap-2 sm:gap-4 shrink-0 justify-self-end col-start-3 row-start-1">
         {!user && (
           <Link href="/register">
             <p
