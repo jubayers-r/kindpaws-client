@@ -31,8 +31,8 @@ export const FAQ = () => {
         <Image
           src="/assets/FAQ/paw-bg-pattern-white.png"
           alt="bg-paw"
-          width={403}
-          height={402}
+          width={450}
+          height={450}
           sizes="(max-width: 1024px) 300px, 400px"
           quality={90}
           className="absolute -top-0 -z-1 h-auto"
